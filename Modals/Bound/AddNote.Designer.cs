@@ -42,7 +42,6 @@
             this.productLabel.Size = new System.Drawing.Size(84, 15);
             this.productLabel.TabIndex = 0;
             this.productLabel.Text = "Product Name";
-            this.productLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // noteInput
             // 
