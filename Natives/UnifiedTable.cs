@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,61 +22,51 @@ namespace StockerFrontend.Natives
 
     internal class UnifiedTable
     {
-        private List<OutstandingTranslation> translations = new List<OutstandingTranslation>();
-        private List<UnifiedEntry> unifiedEntries = new List<UnifiedEntry>();
 
-        public UnifiedTable()
-        {
-            for (int i = 0; i < 5; i++)
-                unifiedEntries.Add(new UnifiedEntry());
+        [DllImport("Stocker.dll")]
+        private static extern IntPtr unifiedTable_new();
 
-            for (int i = 0; i < unifiedEntries.Count(); i++)
-            {
-                unifiedEntries[i].Name = "Product " + i.ToString();
-                unifiedEntries[i].Count = i;
-                unifiedEntries[i].Variance = i;
-            }
-            
+        [DllImport("Stocker.dll")]
+        private static extern void unifiedTable_delete(IntPtr table);
 
-            translations.Add(new OutstandingTranslation());
-            translations.Add(new OutstandingTranslation());
-            translations[0].UnifiedIndex = 2;
-            translations[1].UnifiedIndex = 4;
-        }
 
-        public bool Ready()
-        {
-            return translations.Count() == 0;
-        }
 
-        public uint CountOutstandingTranslations()
-        {
-            return (uint)translations.Count();
-        }
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_loadTranslations(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string file);
 
-        public OutstandingTranslation GetOutstandingTranslation(uint Index)
-        {
-            return translations[(int)Index];
-        }
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_saveTranslations(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string file);
 
-        public void ProvideTranslation(uint StockIndex, float ratio, StockCountTable stockCountTable)
-        {
-            translations.RemoveAt((int)StockIndex);
-        }
 
-        public void ApplyTranslations()
-        {
 
-        }
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_ready(IntPtr table);
 
-        public uint GetSize()
-        {
-            return (uint)unifiedEntries.Count();
-        }
+        [DllImport("Stocker.dll")]
+        private static extern uint unifiedTable_getOutstandingCount(IntPtr table);
 
-        public UnifiedEntry Get(uint Index)
-        {
-            return unifiedEntries[(int)Index];
-        }
+        [DllImport("Stocker.dll")] //Returns a const pointer
+        private static extern IntPtr unifiedTable_getTranslation(IntPtr table, uint index);
+
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_provideTranslation(IntPtr table, uint index, float ratio, IntPtr stockTable);
+
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_applyTranslations(IntPtr table, IntPtr stockTable);
+
+
+
+        [DllImport("Stocker.dll")]
+        private static extern uint unifiedTable_entryCount(IntPtr table);
+
+        [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
+        private static extern IntPtr unifiedTable_getName(IntPtr table);
+
+        [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
+        private static extern IntPtr unifiedTable_getSize(IntPtr table);
+
+        [DllImport("Stocker.dll")]
+        private static extern float unifiedTable_getCount(IntPtr table, uint index);
+
     }
 }
