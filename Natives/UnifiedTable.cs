@@ -68,5 +68,17 @@ namespace StockerFrontend.Natives
         [DllImport("Stocker.dll")]
         private static extern float unifiedTable_getCount(IntPtr table, uint index);
 
+        private IntPtr table = IntPtr.Zero;
+
+        public UnifiedTable()
+        {
+            table = unifiedTable_new();
+        }
+
+        ~UnifiedTable()
+        {
+            unifiedTable_delete(table);
+        }
+
     }
 }
