@@ -47,6 +47,7 @@
             // 
             // SelectStockFile
             // 
+            this.SelectStockFile.Enabled = false;
             this.SelectStockFile.Location = new System.Drawing.Point(12, 68);
             this.SelectStockFile.Name = "SelectStockFile";
             this.SelectStockFile.Size = new System.Drawing.Size(100, 50);
@@ -66,6 +67,7 @@
             // 
             // resolveTranslationButton
             // 
+            this.resolveTranslationButton.Enabled = false;
             this.resolveTranslationButton.Location = new System.Drawing.Point(12, 124);
             this.resolveTranslationButton.Name = "resolveTranslationButton";
             this.resolveTranslationButton.Size = new System.Drawing.Size(100, 50);
@@ -75,6 +77,7 @@
             // 
             // doneButton
             // 
+            this.doneButton.Enabled = false;
             this.doneButton.Location = new System.Drawing.Point(12, 180);
             this.doneButton.Name = "doneButton";
             this.doneButton.Size = new System.Drawing.Size(100, 50);

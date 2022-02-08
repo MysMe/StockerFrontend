@@ -14,20 +14,21 @@ namespace StockerFrontend
 {
     public partial class FileSelector : Form
     {
+        UnifiedTable unified = new UnifiedTable();
+        StockCountTable count = new StockCountTable();
+
         public FileSelector()
         {
             InitializeComponent();
-
-            UnifiedTable table = new UnifiedTable();
         }
 
         private static string? getFile()
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
             if (result == DialogResult.OK) // Test result.
             {
-                return openFileDialog1.FileName;
+                return openFileDialog.FileName;
             }
             return null;
         }
@@ -35,11 +36,49 @@ namespace StockerFrontend
         private void SelectCountButton_Click(object sender, EventArgs e)
         {
             string? file = getFile();
+            if (file != null)
+            {
+                if (count.Load(file) == 0)
+                {
+                    parseOutputBox.Text += "Stock count parsed successfully.\r\n";
+                    SelectStockFile.Enabled = true;
+                    SelectCountButton.Enabled = false;
+                }
+                else
+                {
+                    parseOutputBox.Text += "Failed to parse stock count.\r\n";
+                    SelectStockFile.Enabled = false;
+                }
+            }
         }
 
         private void SelectStockFile_Click(object sender, EventArgs e)
         {
             string? file = getFile();
+            if (file != null)
+            {
+                int res = unified.load(file, count);
+                if (res == 1)
+                {
+                    parseOutputBox.Text += "Unified table parsed successfully, all translations present.\r\n";
+                    SelectStockFile.Enabled = false;
+                    resolveTranslationButton.Enabled = false;
+                    doneButton.Enabled = true;
+                }
+                else if (res == -1)
+                {
+                    parseOutputBox.Text += "Unable to parse input XLS file.\r\n";
+                    resolveTranslationButton.Enabled = false;
+                    doneButton.Enabled = false;
+                }
+                else
+                {
+                    parseOutputBox.Text += "Unified table parsed successfully, translations required.\r\n";
+                    SelectStockFile.Enabled = false;
+                    resolveTranslationButton.Enabled = true;
+                    doneButton.Enabled = false;
+                }
+            }
         }
     }
 }

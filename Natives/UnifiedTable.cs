@@ -29,6 +29,9 @@ namespace StockerFrontend.Natives
         [DllImport("Stocker.dll")]
         private static extern void unifiedTable_delete(IntPtr table);
 
+        [DllImport("Stocker.dll")]
+        private static extern int unifiedTable_load(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string XLS, IntPtr count);
+
 
 
         [DllImport("Stocker.dll")]
@@ -73,6 +76,11 @@ namespace StockerFrontend.Natives
         public UnifiedTable()
         {
             table = unifiedTable_new();
+        }
+
+        public int load(string XLSSource, StockCountTable count)
+        {
+            return unifiedTable_load(table, XLSSource, count.Ptr());
         }
 
         ~UnifiedTable()
