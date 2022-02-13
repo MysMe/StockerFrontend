@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace StockerFrontend.Natives
 {
-    class OutstandingTranslation
+    public class OutstandingTranslation
     {
         public uint UnifiedIndex = 0;
         public uint CountIndex = 0;
     }
 
-    class UnifiedEntry
+    public class UnifiedEntry
     {
         public String Name = "";
         public float Count = 0;
         public float Variance = 0;
     }
 
-    internal class UnifiedTable
+    public class UnifiedTable
     {
 
         [DllImport("Stocker.dll")]
@@ -48,8 +48,10 @@ namespace StockerFrontend.Natives
         [DllImport("Stocker.dll")]
         private static extern uint unifiedTable_getOutstandingCount(IntPtr table);
 
-        [DllImport("Stocker.dll")] //Returns a const pointer
-        private static extern IntPtr unifiedTable_getTranslation(IntPtr table, uint index);
+        [DllImport("Stocker.dll")]
+        private static extern uint unifiedTable_getTranslationUnifiedIndex(IntPtr table, uint index);
+        [DllImport("Stocker.dll")]
+        private static extern uint unifiedTable_getTranslationUnmatchedIndex(IntPtr table, uint index);
 
         [DllImport("Stocker.dll")]
         private static extern bool unifiedTable_provideTranslation(IntPtr table, uint index, float ratio, IntPtr stockTable);
@@ -63,10 +65,10 @@ namespace StockerFrontend.Natives
         private static extern uint unifiedTable_entryCount(IntPtr table);
 
         [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
-        private static extern IntPtr unifiedTable_getName(IntPtr table);
+        private static extern IntPtr unifiedTable_getName(IntPtr table, uint index);
 
         [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
-        private static extern IntPtr unifiedTable_getSize(IntPtr table);
+        private static extern IntPtr unifiedTable_getSize(IntPtr table, uint index);
 
         [DllImport("Stocker.dll")]
         private static extern float unifiedTable_getCount(IntPtr table, uint index);
@@ -81,6 +83,30 @@ namespace StockerFrontend.Natives
         public int load(string XLSSource, StockCountTable count)
         {
             return unifiedTable_load(table, XLSSource, count.Ptr());
+        }
+
+        public string GetNameSize(uint index)
+        {
+            return Marshal.PtrToStringAnsi(unifiedTable_getName(table, index)) +
+                Marshal.PtrToStringAnsi(unifiedTable_getSize(table, index));
+        }
+
+        public bool ProvideTranslation(uint index, float ratio, IntPtr stockTable)
+        {
+            return unifiedTable_provideTranslation(table, index, ratio, stockTable);
+        }
+
+        public bool Ready()
+        {
+            return unifiedTable_ready(table);
+        }
+
+        public OutstandingTranslation GetTranslation(uint index)
+        {
+            OutstandingTranslation ret = new OutstandingTranslation();
+            ret.UnifiedIndex = unifiedTable_getTranslationUnifiedIndex(table, index);
+            ret.CountIndex = unifiedTable_getTranslationUnmatchedIndex(table, index);
+            return ret;
         }
 
         ~UnifiedTable()

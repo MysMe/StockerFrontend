@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StockerFrontend.Natives
 {
-    internal class StockCountTable
+    public class StockCountTable
     {
         IntPtr table = IntPtr.Zero;
 
@@ -19,6 +19,12 @@ namespace StockerFrontend.Natives
 
         [DllImport("Stocker.dll")]
         private static extern int stockTable_reuse(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string file);
+
+        [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
+        private static extern IntPtr stockTable_getStockName(IntPtr table, uint index);
+
+        [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
+        private static extern IntPtr stockTable_getStockSize(IntPtr table, uint index);
 
         public StockCountTable()
         {
@@ -33,6 +39,12 @@ namespace StockerFrontend.Natives
         public int Load(string file)
         {
             return stockTable_reuse(table, file);
+        }
+
+        public string GetNameSize(uint index)
+        {
+            return Marshal.PtrToStringAnsi(stockTable_getStockName(table, index)) + 
+                Marshal.PtrToStringAnsi(stockTable_getStockSize(table, index));
         }
 
         public IntPtr Ptr()

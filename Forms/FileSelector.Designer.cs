@@ -33,6 +33,10 @@
             this.parseOutputBox = new System.Windows.Forms.TextBox();
             this.resolveTranslationButton = new System.Windows.Forms.Button();
             this.doneButton = new System.Windows.Forms.Button();
+            this.StockCountName = new System.Windows.Forms.Label();
+            this.UnifiedName = new System.Windows.Forms.Label();
+            this.TranslationInput = new System.Windows.Forms.TextBox();
+            this.TranslationConfirm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SelectCountButton
@@ -84,12 +88,52 @@
             this.doneButton.TabIndex = 4;
             this.doneButton.Text = "Done";
             this.doneButton.UseVisualStyleBackColor = true;
+            this.doneButton.Click += new System.EventHandler(this.doneButton_Click);
+            // 
+            // StockCountName
+            // 
+            this.StockCountName.AutoSize = true;
+            this.StockCountName.Location = new System.Drawing.Point(118, 236);
+            this.StockCountName.Name = "StockCountName";
+            this.StockCountName.Size = new System.Drawing.Size(38, 15);
+            this.StockCountName.TabIndex = 5;
+            this.StockCountName.Text = "label1";
+            // 
+            // UnifiedName
+            // 
+            this.UnifiedName.AutoSize = true;
+            this.UnifiedName.Location = new System.Drawing.Point(118, 266);
+            this.UnifiedName.Name = "UnifiedName";
+            this.UnifiedName.Size = new System.Drawing.Size(38, 15);
+            this.UnifiedName.TabIndex = 6;
+            this.UnifiedName.Text = "label2";
+            // 
+            // TranslationInput
+            // 
+            this.TranslationInput.Location = new System.Drawing.Point(688, 233);
+            this.TranslationInput.Name = "TranslationInput";
+            this.TranslationInput.Size = new System.Drawing.Size(100, 23);
+            this.TranslationInput.TabIndex = 7;
+            // 
+            // TranslationConfirm
+            // 
+            this.TranslationConfirm.Location = new System.Drawing.Point(688, 262);
+            this.TranslationConfirm.Name = "TranslationConfirm";
+            this.TranslationConfirm.Size = new System.Drawing.Size(100, 23);
+            this.TranslationConfirm.TabIndex = 8;
+            this.TranslationConfirm.Text = "Confirm";
+            this.TranslationConfirm.UseVisualStyleBackColor = true;
+            this.TranslationConfirm.Click += new System.EventHandler(this.TranslationConfirm_Click);
             // 
             // FileSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.TranslationConfirm);
+            this.Controls.Add(this.TranslationInput);
+            this.Controls.Add(this.UnifiedName);
+            this.Controls.Add(this.StockCountName);
             this.Controls.Add(this.doneButton);
             this.Controls.Add(this.resolveTranslationButton);
             this.Controls.Add(this.parseOutputBox);
@@ -109,5 +153,9 @@
         private System.Windows.Forms.TextBox parseOutputBox;
         private System.Windows.Forms.Button resolveTranslationButton;
         private System.Windows.Forms.Button doneButton;
+        private System.Windows.Forms.Label StockCountName;
+        private System.Windows.Forms.Label UnifiedName;
+        private System.Windows.Forms.TextBox TranslationInput;
+        private System.Windows.Forms.Button TranslationConfirm;
     }
 }
