@@ -37,6 +37,8 @@
             this.UnifiedName = new System.Windows.Forms.Label();
             this.TranslationInput = new System.Windows.Forms.TextBox();
             this.TranslationConfirm = new System.Windows.Forms.Button();
+            this.TranslationProgress = new System.Windows.Forms.ProgressBar();
+            this.ProgressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SelectCountButton
@@ -125,11 +127,31 @@
             this.TranslationConfirm.UseVisualStyleBackColor = true;
             this.TranslationConfirm.Click += new System.EventHandler(this.TranslationConfirm_Click);
             // 
+            // TranslationProgress
+            // 
+            this.TranslationProgress.Location = new System.Drawing.Point(118, 284);
+            this.TranslationProgress.MarqueeAnimationSpeed = 0;
+            this.TranslationProgress.Name = "TranslationProgress";
+            this.TranslationProgress.Size = new System.Drawing.Size(572, 23);
+            this.TranslationProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.TranslationProgress.TabIndex = 9;
+            // 
+            // ProgressLabel
+            // 
+            this.ProgressLabel.AutoSize = true;
+            this.ProgressLabel.Location = new System.Drawing.Point(696, 288);
+            this.ProgressLabel.Name = "ProgressLabel";
+            this.ProgressLabel.Size = new System.Drawing.Size(24, 15);
+            this.ProgressLabel.TabIndex = 10;
+            this.ProgressLabel.Text = "0/0";
+            // 
             // FileSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ProgressLabel);
+            this.Controls.Add(this.TranslationProgress);
             this.Controls.Add(this.TranslationConfirm);
             this.Controls.Add(this.TranslationInput);
             this.Controls.Add(this.UnifiedName);
@@ -157,5 +179,7 @@
         private System.Windows.Forms.Label UnifiedName;
         private System.Windows.Forms.TextBox TranslationInput;
         private System.Windows.Forms.Button TranslationConfirm;
+        private System.Windows.Forms.ProgressBar TranslationProgress;
+        private System.Windows.Forms.Label ProgressLabel;
     }
 }

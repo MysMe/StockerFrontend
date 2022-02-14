@@ -42,6 +42,17 @@ namespace StockerFrontend
 
         private void PrintTranslation()
         {
+            //The progress bar is forcefully animated but only forwards.
+            //By setting it higher than the real value then moving it backwards, there is no animation
+            //and it jumps to the correct postion.
+            //Additionally, the bar throws if the index is out of range.
+            if (translationIndex + 2 <= unified.GetTranslationCount())
+                TranslationProgress.Value = (int)translationIndex + 2;
+
+            TranslationProgress.Value = (int)translationIndex + 1;
+
+            ProgressLabel.Text = (translationIndex + 1) + "/" + unified.GetTranslationCount();
+
             var translation = unified.GetTranslation(translationIndex);
             StockCountName.Text = count.GetNameSize(translation.CountIndex);
             UnifiedName.Text= unified.GetNameSize(translation.UnifiedIndex);
@@ -92,7 +103,7 @@ namespace StockerFrontend
                     SelectStockFile.Enabled = false;
                     resolveTranslationButton.Enabled = true;
                     doneButton.Enabled = false;
-                    doneButton.Enabled = true; /*TODO: Remove this*/
+                    TranslationProgress.Maximum = (int)unified.GetTranslationCount();
                     PrintTranslation();
                 }
             }
@@ -102,7 +113,17 @@ namespace StockerFrontend
         {
             unified.ProvideTranslation(translationIndex, float.Parse(TranslationInput.Text), count.Ptr());
             translationIndex++;
-            PrintTranslation();
+            if (translationIndex != unified.GetTranslationCount())
+            {
+                PrintTranslation();
+            }
+            else
+            {
+                unified.ApplyTranslations(count.Ptr());
+                resolveTranslationButton.Enabled = false;
+                TranslationConfirm.Enabled = false;
+                doneButton.Enabled = true;
+            }
         }
 
         private void doneButton_Click(object sender, EventArgs e)

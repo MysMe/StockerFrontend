@@ -57,7 +57,7 @@ namespace StockerFrontend.Natives
         private static extern bool unifiedTable_provideTranslation(IntPtr table, uint index, float ratio, IntPtr stockTable);
 
         [DllImport("Stocker.dll")]
-        private static extern bool unifiedTable_applyTranslations(IntPtr table, IntPtr stockTable);
+        private static extern void unifiedTable_applyTranslations(IntPtr table, IntPtr stockTable);
 
 
 
@@ -89,6 +89,16 @@ namespace StockerFrontend.Natives
         {
             return Marshal.PtrToStringAnsi(unifiedTable_getName(table, index)) +
                 Marshal.PtrToStringAnsi(unifiedTable_getSize(table, index));
+        }
+
+        public uint GetTranslationCount()
+        {
+            return unifiedTable_getOutstandingCount(table);
+        }
+
+        public void ApplyTranslations(IntPtr count)
+        {
+            unifiedTable_applyTranslations(table, count);
         }
 
         public bool ProvideTranslation(uint index, float ratio, IntPtr stockTable)
