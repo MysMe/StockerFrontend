@@ -59,6 +59,7 @@
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // confirmButton
             // 
@@ -68,6 +69,7 @@
             this.confirmButton.TabIndex = 3;
             this.confirmButton.Text = "Done";
             this.confirmButton.UseVisualStyleBackColor = true;
+            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
             // 
             // AddNote
             // 

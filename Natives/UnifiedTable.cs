@@ -15,9 +15,48 @@ namespace StockerFrontend.Natives
 
     public class UnifiedEntry
     {
-        public String Name = "";
-        public float Count = 0;
-        public float Variance = 0;
+
+        public enum status
+        {
+            normal,
+            confirmed,
+            recount,
+            critical
+        }
+
+        public string Name = "";
+        public string Size = "";
+        private float Count = 0;
+        private float Variance = 0;
+        public bool isHidden = false;
+        public status Status = status.normal;
+        public string notes = "";
+
+        public float Transferred = 0;
+        public float Delivered = 0;
+
+        public float GetCount()
+        {
+            return Count;
+        }
+
+        public float GetExpected()
+        {
+            return Count - Variance + Delivered - Transferred;
+        }
+
+        public float GetVariance()
+        {
+            return GetCount() - GetExpected();
+        }
+
+        public UnifiedEntry(UnifiedTable table, uint index)
+        {
+            Name = table.GetName(index);
+            Size = table.GetSize(index);
+            Count = table.GetCount(index);
+            Variance = table.GetVariance(index);
+        }
     }
 
     public class UnifiedTable
@@ -38,7 +77,7 @@ namespace StockerFrontend.Natives
         private static extern bool unifiedTable_loadTranslations(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string file);
 
         [DllImport("Stocker.dll")]
-        private static extern bool unifiedTable_saveTranslations(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string file);
+        private static extern void unifiedTable_saveTranslations(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string file);
 
 
 
@@ -71,7 +110,20 @@ namespace StockerFrontend.Natives
         private static extern IntPtr unifiedTable_getSize(IntPtr table, uint index);
 
         [DllImport("Stocker.dll")]
-        private static extern float unifiedTable_getCount(IntPtr table, uint index);
+        private static extern float unifiedTable_getVariance(IntPtr table, uint index);
+
+
+        [DllImport("Stocker.dll")]
+        private static extern float unifiedTable_getUnifiedCount(IntPtr table, uint index);
+
+
+
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_hasTranslation(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string product);
+
+
+        [DllImport("Stocker.dll")]
+        private static extern float unifiedTable_getTranslationFromName(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string product);
 
         private IntPtr table = IntPtr.Zero;
 
@@ -89,6 +141,16 @@ namespace StockerFrontend.Natives
         {
             return Marshal.PtrToStringAnsi(unifiedTable_getName(table, index)) +
                 Marshal.PtrToStringAnsi(unifiedTable_getSize(table, index));
+        }
+
+        public bool HasTranslation(string product)
+        {
+            return unifiedTable_hasTranslation(table, product);
+        }
+
+        public float GetTranslation(string product)
+        {
+            return unifiedTable_getTranslationFromName(table, product);
         }
 
         public uint GetTranslationCount()
@@ -119,9 +181,58 @@ namespace StockerFrontend.Natives
             return ret;
         }
 
+        public bool LoadTranslations(string file)
+        {
+            return unifiedTable_loadTranslations(table, file);
+        }
+
+        public void SaveTranslations(string file)
+        {
+            unifiedTable_saveTranslations(table, file);
+        }
+
+        public uint Count()
+        {
+            return unifiedTable_entryCount(table);
+        }
+
+        public string GetName(uint index)
+        {
+            string? ret = Marshal.PtrToStringAnsi(unifiedTable_getName(table, index));
+            if (ret == null)
+                return "";
+            return ret;
+        }
+        public string GetSize(uint index)
+        {
+            string? ret = Marshal.PtrToStringAnsi(unifiedTable_getSize(table, index));
+            if (ret == null)
+                return "";
+            return ret;
+        }
+        public float GetCount(uint index)
+        {
+            return unifiedTable_getUnifiedCount(table, index);
+        }
+
+        public float GetVariance(uint index)
+        {
+            return unifiedTable_getVariance(table, index);
+        }
+
+        public UnifiedEntry Get(uint index)
+        {
+            return new UnifiedEntry(this, index);
+        }
+
         ~UnifiedTable()
         {
             unifiedTable_delete(table);
+        }
+
+        public IntPtr Ptr()
+        {
+            return table;
         }
 
     }

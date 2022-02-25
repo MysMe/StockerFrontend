@@ -30,20 +30,12 @@
         {
             this.SelectCountButton = new System.Windows.Forms.Button();
             this.SelectStockFile = new System.Windows.Forms.Button();
-            this.parseOutputBox = new System.Windows.Forms.TextBox();
-            this.resolveTranslationButton = new System.Windows.Forms.Button();
-            this.doneButton = new System.Windows.Forms.Button();
-            this.StockCountName = new System.Windows.Forms.Label();
-            this.UnifiedName = new System.Windows.Forms.Label();
-            this.TranslationInput = new System.Windows.Forms.TextBox();
-            this.TranslationConfirm = new System.Windows.Forms.Button();
-            this.TranslationProgress = new System.Windows.Forms.ProgressBar();
-            this.ProgressLabel = new System.Windows.Forms.Label();
+            this.infoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SelectCountButton
             // 
-            this.SelectCountButton.Location = new System.Drawing.Point(12, 12);
+            this.SelectCountButton.Location = new System.Drawing.Point(0, 35);
             this.SelectCountButton.Name = "SelectCountButton";
             this.SelectCountButton.Size = new System.Drawing.Size(100, 50);
             this.SelectCountButton.TabIndex = 0;
@@ -54,7 +46,7 @@
             // SelectStockFile
             // 
             this.SelectStockFile.Enabled = false;
-            this.SelectStockFile.Location = new System.Drawing.Point(12, 68);
+            this.SelectStockFile.Location = new System.Drawing.Point(108, 35);
             this.SelectStockFile.Name = "SelectStockFile";
             this.SelectStockFile.Size = new System.Drawing.Size(100, 50);
             this.SelectStockFile.TabIndex = 1;
@@ -62,107 +54,32 @@
             this.SelectStockFile.UseVisualStyleBackColor = true;
             this.SelectStockFile.Click += new System.EventHandler(this.SelectStockFile_Click);
             // 
-            // parseOutputBox
+            // infoLabel
             // 
-            this.parseOutputBox.Location = new System.Drawing.Point(118, 12);
-            this.parseOutputBox.Multiline = true;
-            this.parseOutputBox.Name = "parseOutputBox";
-            this.parseOutputBox.ReadOnly = true;
-            this.parseOutputBox.Size = new System.Drawing.Size(670, 218);
-            this.parseOutputBox.TabIndex = 2;
-            // 
-            // resolveTranslationButton
-            // 
-            this.resolveTranslationButton.Enabled = false;
-            this.resolveTranslationButton.Location = new System.Drawing.Point(12, 124);
-            this.resolveTranslationButton.Name = "resolveTranslationButton";
-            this.resolveTranslationButton.Size = new System.Drawing.Size(100, 50);
-            this.resolveTranslationButton.TabIndex = 3;
-            this.resolveTranslationButton.Text = "Resolve Translation";
-            this.resolveTranslationButton.UseVisualStyleBackColor = true;
-            // 
-            // doneButton
-            // 
-            this.doneButton.Enabled = false;
-            this.doneButton.Location = new System.Drawing.Point(12, 180);
-            this.doneButton.Name = "doneButton";
-            this.doneButton.Size = new System.Drawing.Size(100, 50);
-            this.doneButton.TabIndex = 4;
-            this.doneButton.Text = "Done";
-            this.doneButton.UseVisualStyleBackColor = true;
-            this.doneButton.Click += new System.EventHandler(this.doneButton_Click);
-            // 
-            // StockCountName
-            // 
-            this.StockCountName.AutoSize = true;
-            this.StockCountName.Location = new System.Drawing.Point(118, 236);
-            this.StockCountName.Name = "StockCountName";
-            this.StockCountName.Size = new System.Drawing.Size(38, 15);
-            this.StockCountName.TabIndex = 5;
-            this.StockCountName.Text = "label1";
-            // 
-            // UnifiedName
-            // 
-            this.UnifiedName.AutoSize = true;
-            this.UnifiedName.Location = new System.Drawing.Point(118, 266);
-            this.UnifiedName.Name = "UnifiedName";
-            this.UnifiedName.Size = new System.Drawing.Size(38, 15);
-            this.UnifiedName.TabIndex = 6;
-            this.UnifiedName.Text = "label2";
-            // 
-            // TranslationInput
-            // 
-            this.TranslationInput.Location = new System.Drawing.Point(688, 233);
-            this.TranslationInput.Name = "TranslationInput";
-            this.TranslationInput.Size = new System.Drawing.Size(100, 23);
-            this.TranslationInput.TabIndex = 7;
-            // 
-            // TranslationConfirm
-            // 
-            this.TranslationConfirm.Location = new System.Drawing.Point(688, 262);
-            this.TranslationConfirm.Name = "TranslationConfirm";
-            this.TranslationConfirm.Size = new System.Drawing.Size(100, 23);
-            this.TranslationConfirm.TabIndex = 8;
-            this.TranslationConfirm.Text = "Confirm";
-            this.TranslationConfirm.UseVisualStyleBackColor = true;
-            this.TranslationConfirm.Click += new System.EventHandler(this.TranslationConfirm_Click);
-            // 
-            // TranslationProgress
-            // 
-            this.TranslationProgress.Location = new System.Drawing.Point(118, 284);
-            this.TranslationProgress.MarqueeAnimationSpeed = 0;
-            this.TranslationProgress.Name = "TranslationProgress";
-            this.TranslationProgress.Size = new System.Drawing.Size(572, 23);
-            this.TranslationProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.TranslationProgress.TabIndex = 9;
-            // 
-            // ProgressLabel
-            // 
-            this.ProgressLabel.AutoSize = true;
-            this.ProgressLabel.Location = new System.Drawing.Point(696, 288);
-            this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.Size = new System.Drawing.Size(24, 15);
-            this.ProgressLabel.TabIndex = 10;
-            this.ProgressLabel.Text = "0/0";
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.infoLabel.Location = new System.Drawing.Point(0, 0);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(208, 30);
+            this.infoLabel.TabIndex = 2;
+            this.infoLabel.Text = "To begin, please select a \r\nstock count file and a stock report file.";
             // 
             // FileSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ProgressLabel);
-            this.Controls.Add(this.TranslationProgress);
-            this.Controls.Add(this.TranslationConfirm);
-            this.Controls.Add(this.TranslationInput);
-            this.Controls.Add(this.UnifiedName);
-            this.Controls.Add(this.StockCountName);
-            this.Controls.Add(this.doneButton);
-            this.Controls.Add(this.resolveTranslationButton);
-            this.Controls.Add(this.parseOutputBox);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(216, 97);
+            this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.SelectStockFile);
             this.Controls.Add(this.SelectCountButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FileSelector";
-            this.Text = "FileSelector";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Please Select Files";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,14 +89,6 @@
 
         private System.Windows.Forms.Button SelectCountButton;
         private System.Windows.Forms.Button SelectStockFile;
-        private System.Windows.Forms.TextBox parseOutputBox;
-        private System.Windows.Forms.Button resolveTranslationButton;
-        private System.Windows.Forms.Button doneButton;
-        private System.Windows.Forms.Label StockCountName;
-        private System.Windows.Forms.Label UnifiedName;
-        private System.Windows.Forms.TextBox TranslationInput;
-        private System.Windows.Forms.Button TranslationConfirm;
-        private System.Windows.Forms.ProgressBar TranslationProgress;
-        private System.Windows.Forms.Label ProgressLabel;
+        private System.Windows.Forms.Label infoLabel;
     }
 }

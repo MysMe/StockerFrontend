@@ -28,182 +28,520 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toggleRecounts = new System.Windows.Forms.Button();
-            this.toggleCleared = new System.Windows.Forms.Button();
-            this.toggleCritical = new System.Windows.Forms.Button();
-            this.completeButton = new System.Windows.Forms.Button();
-            this.addDelivery = new System.Windows.Forms.Button();
-            this.addTransfer = new System.Windows.Forms.Button();
-            this.viewDeliveries = new System.Windows.Forms.Button();
-            this.viewTransfers = new System.Windows.Forms.Button();
             this.CountTable = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Expected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Counted = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Variance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShowHide = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Confirm = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Recount = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Critical = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Notes = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.visibilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unhideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.swapShownHiddenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showConfirmedConfirmedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showRecountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showCriticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideAllReviewedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideOnReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllReviewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transfersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addDeliveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageDeliveriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageTransfersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bulkActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ACL01ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ACL05ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ACL1ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoCriticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ACG1ToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ACG3ToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ACG5ToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.confirmAllUnreviewedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recountAllUnreviewedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.criticalAllUnreviewedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.displayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.resetSortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.CountTable)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // toggleRecounts
-            // 
-            this.toggleRecounts.Location = new System.Drawing.Point(12, 12);
-            this.toggleRecounts.Name = "toggleRecounts";
-            this.toggleRecounts.Size = new System.Drawing.Size(75, 39);
-            this.toggleRecounts.TabIndex = 0;
-            this.toggleRecounts.Text = "Show/Hide Recounts";
-            this.toggleRecounts.UseVisualStyleBackColor = true;
-            // 
-            // toggleCleared
-            // 
-            this.toggleCleared.Location = new System.Drawing.Point(93, 12);
-            this.toggleCleared.Name = "toggleCleared";
-            this.toggleCleared.Size = new System.Drawing.Size(75, 39);
-            this.toggleCleared.TabIndex = 1;
-            this.toggleCleared.Text = "Show/Hide Cleared";
-            this.toggleCleared.UseVisualStyleBackColor = true;
-            // 
-            // toggleCritical
-            // 
-            this.toggleCritical.Location = new System.Drawing.Point(174, 12);
-            this.toggleCritical.Name = "toggleCritical";
-            this.toggleCritical.Size = new System.Drawing.Size(75, 39);
-            this.toggleCritical.TabIndex = 2;
-            this.toggleCritical.Text = "Show/Hide Critical";
-            this.toggleCritical.UseVisualStyleBackColor = true;
-            // 
-            // completeButton
-            // 
-            this.completeButton.Location = new System.Drawing.Point(255, 12);
-            this.completeButton.Name = "completeButton";
-            this.completeButton.Size = new System.Drawing.Size(75, 39);
-            this.completeButton.TabIndex = 3;
-            this.completeButton.Text = "Complete";
-            this.completeButton.UseVisualStyleBackColor = true;
-            // 
-            // addDelivery
-            // 
-            this.addDelivery.Location = new System.Drawing.Point(336, 12);
-            this.addDelivery.Name = "addDelivery";
-            this.addDelivery.Size = new System.Drawing.Size(75, 39);
-            this.addDelivery.TabIndex = 4;
-            this.addDelivery.Text = "Add Delivery";
-            this.addDelivery.UseVisualStyleBackColor = true;
-            // 
-            // addTransfer
-            // 
-            this.addTransfer.Location = new System.Drawing.Point(417, 12);
-            this.addTransfer.Name = "addTransfer";
-            this.addTransfer.Size = new System.Drawing.Size(75, 39);
-            this.addTransfer.TabIndex = 5;
-            this.addTransfer.Text = "Add Transfer";
-            this.addTransfer.UseVisualStyleBackColor = true;
-            // 
-            // viewDeliveries
-            // 
-            this.viewDeliveries.Location = new System.Drawing.Point(498, 12);
-            this.viewDeliveries.Name = "viewDeliveries";
-            this.viewDeliveries.Size = new System.Drawing.Size(75, 39);
-            this.viewDeliveries.TabIndex = 6;
-            this.viewDeliveries.Text = "View Deliveries";
-            this.viewDeliveries.UseVisualStyleBackColor = true;
-            // 
-            // viewTransfers
-            // 
-            this.viewTransfers.Location = new System.Drawing.Point(579, 12);
-            this.viewTransfers.Name = "viewTransfers";
-            this.viewTransfers.Size = new System.Drawing.Size(75, 39);
-            this.viewTransfers.TabIndex = 7;
-            this.viewTransfers.Text = "View Transfers";
-            this.viewTransfers.UseVisualStyleBackColor = true;
             // 
             // CountTable
             // 
             this.CountTable.AllowUserToAddRows = false;
             this.CountTable.AllowUserToDeleteRows = false;
             this.CountTable.AllowUserToOrderColumns = true;
+            this.CountTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CountTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CountTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.StockName,
             this.StockSize,
             this.Expected,
             this.Counted,
-            this.Variance});
+            this.Variance,
+            this.ShowHide,
+            this.Confirm,
+            this.Recount,
+            this.Critical,
+            this.Notes});
             this.CountTable.Location = new System.Drawing.Point(9, 57);
             this.CountTable.MultiSelect = false;
             this.CountTable.Name = "CountTable";
             this.CountTable.ReadOnly = true;
+            this.CountTable.RowHeadersVisible = false;
             this.CountTable.RowTemplate.Height = 25;
             this.CountTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.CountTable.Size = new System.Drawing.Size(645, 381);
+            this.CountTable.Size = new System.Drawing.Size(1225, 381);
             this.CountTable.TabIndex = 8;
+            this.CountTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CountTable_CellContentClick);
+            // 
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
             // 
             // StockName
             // 
+            this.StockName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.StockName.HeaderText = "Product Name";
             this.StockName.Name = "StockName";
             this.StockName.ReadOnly = true;
             // 
             // StockSize
             // 
+            this.StockSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.StockSize.HeaderText = "Size";
             this.StockSize.Name = "StockSize";
             this.StockSize.ReadOnly = true;
+            this.StockSize.Width = 52;
             // 
             // Expected
             // 
+            this.Expected.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Expected.HeaderText = "Expected";
             this.Expected.Name = "Expected";
             this.Expected.ReadOnly = true;
+            this.Expected.Width = 80;
             // 
             // Counted
             // 
+            this.Counted.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Counted.HeaderText = "Counted";
             this.Counted.Name = "Counted";
             this.Counted.ReadOnly = true;
+            this.Counted.Width = 78;
             // 
             // Variance
             // 
+            this.Variance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Variance.HeaderText = "Variance";
             this.Variance.Name = "Variance";
             this.Variance.ReadOnly = true;
+            this.Variance.Width = 76;
+            // 
+            // ShowHide
+            // 
+            this.ShowHide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ShowHide.HeaderText = "Hide";
+            this.ShowHide.Name = "ShowHide";
+            this.ShowHide.ReadOnly = true;
+            this.ShowHide.Text = "H";
+            this.ShowHide.Width = 38;
+            // 
+            // Confirm
+            // 
+            this.Confirm.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Confirm.HeaderText = "Confirm";
+            this.Confirm.Name = "Confirm";
+            this.Confirm.ReadOnly = true;
+            this.Confirm.Text = "Co";
+            this.Confirm.Width = 57;
+            // 
+            // Recount
+            // 
+            this.Recount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Recount.HeaderText = "Recount";
+            this.Recount.Name = "Recount";
+            this.Recount.ReadOnly = true;
+            this.Recount.Text = "R";
+            this.Recount.Width = 57;
+            // 
+            // Critical
+            // 
+            this.Critical.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Critical.HeaderText = "Critical";
+            this.Critical.Name = "Critical";
+            this.Critical.ReadOnly = true;
+            this.Critical.Text = "Cr";
+            this.Critical.Width = 50;
+            // 
+            // Notes
+            // 
+            this.Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Notes.HeaderText = "Notes";
+            this.Notes.Name = "Notes";
+            this.Notes.ReadOnly = true;
+            this.Notes.Text = "N";
+            this.Notes.Width = 44;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.visibilityToolStripMenuItem,
+            this.transfersToolStripMenuItem,
+            this.bulkActionsToolStripMenuItem,
+            this.exportToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1246, 24);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // visibilityToolStripMenuItem
+            // 
+            this.visibilityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.unhideAllToolStripMenuItem,
+            this.swapShownHiddenToolStripMenuItem,
+            this.showConfirmedConfirmedToolStripMenuItem,
+            this.showRecountToolStripMenuItem,
+            this.showCriticalToolStripMenuItem,
+            this.hideAllReviewedToolStripMenuItem,
+            this.hideOnReviewToolStripMenuItem,
+            this.clearAllReviewsToolStripMenuItem,
+            this.resetSortingToolStripMenuItem});
+            this.visibilityToolStripMenuItem.Name = "visibilityToolStripMenuItem";
+            this.visibilityToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.visibilityToolStripMenuItem.Text = "Visibility";
+            // 
+            // unhideAllToolStripMenuItem
+            // 
+            this.unhideAllToolStripMenuItem.Name = "unhideAllToolStripMenuItem";
+            this.unhideAllToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.unhideAllToolStripMenuItem.Text = "Unhide All";
+            this.unhideAllToolStripMenuItem.Click += new System.EventHandler(this.unhideAllToolStripMenuItem_Click);
+            // 
+            // swapShownHiddenToolStripMenuItem
+            // 
+            this.swapShownHiddenToolStripMenuItem.CheckOnClick = true;
+            this.swapShownHiddenToolStripMenuItem.Name = "swapShownHiddenToolStripMenuItem";
+            this.swapShownHiddenToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.swapShownHiddenToolStripMenuItem.Text = "Swap Shown/Hidden";
+            this.swapShownHiddenToolStripMenuItem.ToolTipText = "If checked, the table will only display hidden entries. Otherwise, the table will" +
+    " only\r\n display unhidden entries.";
+            this.swapShownHiddenToolStripMenuItem.Click += new System.EventHandler(this.swapShownHiddenToolStripMenuItem_Click);
+            // 
+            // showConfirmedConfirmedToolStripMenuItem
+            // 
+            this.showConfirmedConfirmedToolStripMenuItem.Checked = true;
+            this.showConfirmedConfirmedToolStripMenuItem.CheckOnClick = true;
+            this.showConfirmedConfirmedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showConfirmedConfirmedToolStripMenuItem.Name = "showConfirmedConfirmedToolStripMenuItem";
+            this.showConfirmedConfirmedToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.showConfirmedConfirmedToolStripMenuItem.Text = "Show Confirmed";
+            this.showConfirmedConfirmedToolStripMenuItem.Click += new System.EventHandler(this.showConfirmedToolStripMenuItem_Click);
+            // 
+            // showRecountToolStripMenuItem
+            // 
+            this.showRecountToolStripMenuItem.Checked = true;
+            this.showRecountToolStripMenuItem.CheckOnClick = true;
+            this.showRecountToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showRecountToolStripMenuItem.Name = "showRecountToolStripMenuItem";
+            this.showRecountToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.showRecountToolStripMenuItem.Text = "Show Recount";
+            this.showRecountToolStripMenuItem.Click += new System.EventHandler(this.showRecountToolStripMenuItem_Click);
+            // 
+            // showCriticalToolStripMenuItem
+            // 
+            this.showCriticalToolStripMenuItem.Checked = true;
+            this.showCriticalToolStripMenuItem.CheckOnClick = true;
+            this.showCriticalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showCriticalToolStripMenuItem.Name = "showCriticalToolStripMenuItem";
+            this.showCriticalToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.showCriticalToolStripMenuItem.Text = "Show Critical";
+            this.showCriticalToolStripMenuItem.Click += new System.EventHandler(this.showCriticalToolStripMenuItem_Click);
+            // 
+            // hideAllReviewedToolStripMenuItem
+            // 
+            this.hideAllReviewedToolStripMenuItem.Name = "hideAllReviewedToolStripMenuItem";
+            this.hideAllReviewedToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.hideAllReviewedToolStripMenuItem.Text = "Hide All Reviewed";
+            this.hideAllReviewedToolStripMenuItem.ToolTipText = "Hides all entries that have been marked as confirmed, recount or critical.";
+            this.hideAllReviewedToolStripMenuItem.Click += new System.EventHandler(this.hideAllReviewedToolStripMenuItem_Click);
+            // 
+            // hideOnReviewToolStripMenuItem
+            // 
+            this.hideOnReviewToolStripMenuItem.Checked = true;
+            this.hideOnReviewToolStripMenuItem.CheckOnClick = true;
+            this.hideOnReviewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hideOnReviewToolStripMenuItem.Name = "hideOnReviewToolStripMenuItem";
+            this.hideOnReviewToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.hideOnReviewToolStripMenuItem.Text = "Hide On Review";
+            this.hideOnReviewToolStripMenuItem.ToolTipText = "If enabled, setting a product state also automatically hides it.";
+            this.hideOnReviewToolStripMenuItem.Click += new System.EventHandler(this.hideOnReviewToolStripMenuItem_Click);
+            // 
+            // clearAllReviewsToolStripMenuItem
+            // 
+            this.clearAllReviewsToolStripMenuItem.Name = "clearAllReviewsToolStripMenuItem";
+            this.clearAllReviewsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.clearAllReviewsToolStripMenuItem.Text = "Clear All Reviews";
+            this.clearAllReviewsToolStripMenuItem.Click += new System.EventHandler(this.clearAllReviewsToolStripMenuItem_Click);
+            // 
+            // transfersToolStripMenuItem
+            // 
+            this.transfersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addDeliveryToolStripMenuItem,
+            this.addTransferToolStripMenuItem,
+            this.manageDeliveriesToolStripMenuItem,
+            this.manageTransfersToolStripMenuItem});
+            this.transfersToolStripMenuItem.Name = "transfersToolStripMenuItem";
+            this.transfersToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.transfersToolStripMenuItem.Text = "Transfers";
+            // 
+            // addDeliveryToolStripMenuItem
+            // 
+            this.addDeliveryToolStripMenuItem.Name = "addDeliveryToolStripMenuItem";
+            this.addDeliveryToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.addDeliveryToolStripMenuItem.Text = "Add Delivery";
+            this.addDeliveryToolStripMenuItem.Click += new System.EventHandler(this.addDeliveryToolStripMenuItem_Click);
+            // 
+            // addTransferToolStripMenuItem
+            // 
+            this.addTransferToolStripMenuItem.Name = "addTransferToolStripMenuItem";
+            this.addTransferToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.addTransferToolStripMenuItem.Text = "Add Transfer";
+            this.addTransferToolStripMenuItem.Click += new System.EventHandler(this.addTransferToolStripMenuItem_Click);
+            // 
+            // manageDeliveriesToolStripMenuItem
+            // 
+            this.manageDeliveriesToolStripMenuItem.Name = "manageDeliveriesToolStripMenuItem";
+            this.manageDeliveriesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.manageDeliveriesToolStripMenuItem.Text = "Manage Deliveries";
+            this.manageDeliveriesToolStripMenuItem.Click += new System.EventHandler(this.manageDeliveriesToolStripMenuItem_Click);
+            // 
+            // manageTransfersToolStripMenuItem
+            // 
+            this.manageTransfersToolStripMenuItem.Name = "manageTransfersToolStripMenuItem";
+            this.manageTransfersToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.manageTransfersToolStripMenuItem.Text = "Manage Transfers";
+            this.manageTransfersToolStripMenuItem.Click += new System.EventHandler(this.manageTransfersToolStripMenuItem_Click);
+            // 
+            // bulkActionsToolStripMenuItem
+            // 
+            this.bulkActionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoConfirmToolStripMenuItem,
+            this.autoCriticalToolStripMenuItem,
+            this.confirmAllUnreviewedToolStripMenuItem,
+            this.recountAllUnreviewedToolStripMenuItem,
+            this.criticalAllUnreviewedToolStripMenuItem});
+            this.bulkActionsToolStripMenuItem.Name = "bulkActionsToolStripMenuItem";
+            this.bulkActionsToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.bulkActionsToolStripMenuItem.Text = "Bulk Actions";
+            // 
+            // autoConfirmToolStripMenuItem
+            // 
+            this.autoConfirmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ACL01ToolStripMenuItem2,
+            this.ACL05ToolStripMenuItem3,
+            this.ACL1ToolStripMenuItem4});
+            this.autoConfirmToolStripMenuItem.Name = "autoConfirmToolStripMenuItem";
+            this.autoConfirmToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.autoConfirmToolStripMenuItem.Text = "Auto Confirm";
+            // 
+            // ACL01ToolStripMenuItem2
+            // 
+            this.ACL01ToolStripMenuItem2.Name = "ACL01ToolStripMenuItem2";
+            this.ACL01ToolStripMenuItem2.Size = new System.Drawing.Size(108, 22);
+            this.ACL01ToolStripMenuItem2.Text = "<= 0.1";
+            this.ACL01ToolStripMenuItem2.Click += new System.EventHandler(this.ACL01ToolStripMenuItem2_Click);
+            // 
+            // ACL05ToolStripMenuItem3
+            // 
+            this.ACL05ToolStripMenuItem3.Name = "ACL05ToolStripMenuItem3";
+            this.ACL05ToolStripMenuItem3.Size = new System.Drawing.Size(108, 22);
+            this.ACL05ToolStripMenuItem3.Text = "<= 0.5";
+            this.ACL05ToolStripMenuItem3.Click += new System.EventHandler(this.ACL05ToolStripMenuItem3_Click);
+            // 
+            // ACL1ToolStripMenuItem4
+            // 
+            this.ACL1ToolStripMenuItem4.Name = "ACL1ToolStripMenuItem4";
+            this.ACL1ToolStripMenuItem4.Size = new System.Drawing.Size(108, 22);
+            this.ACL1ToolStripMenuItem4.Text = "<= 1";
+            this.ACL1ToolStripMenuItem4.Click += new System.EventHandler(this.ACL1ToolStripMenuItem4_Click);
+            // 
+            // autoCriticalToolStripMenuItem
+            // 
+            this.autoCriticalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ACG1ToolStripMenuItem5,
+            this.ACG3ToolStripMenuItem6,
+            this.ACG5ToolStripMenuItem7});
+            this.autoCriticalToolStripMenuItem.Name = "autoCriticalToolStripMenuItem";
+            this.autoCriticalToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.autoCriticalToolStripMenuItem.Text = "Auto Critical";
+            // 
+            // ACG1ToolStripMenuItem5
+            // 
+            this.ACG1ToolStripMenuItem5.Name = "ACG1ToolStripMenuItem5";
+            this.ACG1ToolStripMenuItem5.Size = new System.Drawing.Size(91, 22);
+            this.ACG1ToolStripMenuItem5.Text = "> 1";
+            this.ACG1ToolStripMenuItem5.Click += new System.EventHandler(this.ACG1ToolStripMenuItem5_Click);
+            // 
+            // ACG3ToolStripMenuItem6
+            // 
+            this.ACG3ToolStripMenuItem6.Name = "ACG3ToolStripMenuItem6";
+            this.ACG3ToolStripMenuItem6.Size = new System.Drawing.Size(91, 22);
+            this.ACG3ToolStripMenuItem6.Text = "> 3";
+            this.ACG3ToolStripMenuItem6.Click += new System.EventHandler(this.ACG3ToolStripMenuItem6_Click);
+            // 
+            // ACG5ToolStripMenuItem7
+            // 
+            this.ACG5ToolStripMenuItem7.Name = "ACG5ToolStripMenuItem7";
+            this.ACG5ToolStripMenuItem7.Size = new System.Drawing.Size(91, 22);
+            this.ACG5ToolStripMenuItem7.Text = "> 5";
+            this.ACG5ToolStripMenuItem7.Click += new System.EventHandler(this.ACG5ToolStripMenuItem7_Click);
+            // 
+            // confirmAllUnreviewedToolStripMenuItem
+            // 
+            this.confirmAllUnreviewedToolStripMenuItem.Name = "confirmAllUnreviewedToolStripMenuItem";
+            this.confirmAllUnreviewedToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.confirmAllUnreviewedToolStripMenuItem.Text = "Confirm All Unreviewed";
+            this.confirmAllUnreviewedToolStripMenuItem.Click += new System.EventHandler(this.confirmAllUnreviewedToolStripMenuItem_Click);
+            // 
+            // recountAllUnreviewedToolStripMenuItem
+            // 
+            this.recountAllUnreviewedToolStripMenuItem.Name = "recountAllUnreviewedToolStripMenuItem";
+            this.recountAllUnreviewedToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.recountAllUnreviewedToolStripMenuItem.Text = "Recount All Unreviewed";
+            this.recountAllUnreviewedToolStripMenuItem.Click += new System.EventHandler(this.recountAllUnreviewedToolStripMenuItem_Click);
+            // 
+            // criticalAllUnreviewedToolStripMenuItem
+            // 
+            this.criticalAllUnreviewedToolStripMenuItem.Name = "criticalAllUnreviewedToolStripMenuItem";
+            this.criticalAllUnreviewedToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.criticalAllUnreviewedToolStripMenuItem.Text = "Critical All Unreviewed";
+            this.criticalAllUnreviewedToolStripMenuItem.Click += new System.EventHandler(this.criticalAllUnreviewedToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.displayToolStripMenuItem,
+            this.saveToFileToolStripMenuItem});
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.exportToolStripMenuItem.Text = "Report";
+            // 
+            // displayToolStripMenuItem
+            // 
+            this.displayToolStripMenuItem.Name = "displayToolStripMenuItem";
+            this.displayToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.displayToolStripMenuItem.Text = "Display";
+            this.displayToolStripMenuItem.Click += new System.EventHandler(this.displayToolStripMenuItem_Click);
+            // 
+            // saveToFileToolStripMenuItem
+            // 
+            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
+            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.saveToFileToolStripMenuItem.Text = "Save To File";
+            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.saveToFileToolStripMenuItem_Click);
+            // 
+            // searchBox
+            // 
+            this.searchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchBox.Location = new System.Drawing.Point(12, 28);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(1222, 23);
+            this.searchBox.TabIndex = 10;
+            this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
+            // 
+            // resetSortingToolStripMenuItem
+            // 
+            this.resetSortingToolStripMenuItem.Name = "resetSortingToolStripMenuItem";
+            this.resetSortingToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.resetSortingToolStripMenuItem.Text = "Reset Sorting";
+            this.resetSortingToolStripMenuItem.Click += new System.EventHandler(this.resetSortingToolStripMenuItem_Click);
             // 
             // StockOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1246, 450);
+            this.Controls.Add(this.searchBox);
             this.Controls.Add(this.CountTable);
-            this.Controls.Add(this.viewTransfers);
-            this.Controls.Add(this.viewDeliveries);
-            this.Controls.Add(this.addTransfer);
-            this.Controls.Add(this.addDelivery);
-            this.Controls.Add(this.completeButton);
-            this.Controls.Add(this.toggleCritical);
-            this.Controls.Add(this.toggleCleared);
-            this.Controls.Add(this.toggleRecounts);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "StockOverview";
             this.Text = "StockOverview";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.CountTable)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button toggleRecounts;
-        private System.Windows.Forms.Button toggleCleared;
-        private System.Windows.Forms.Button toggleCritical;
-        private System.Windows.Forms.Button completeButton;
-        private System.Windows.Forms.Button addDelivery;
-        private System.Windows.Forms.Button addTransfer;
-        private System.Windows.Forms.Button viewDeliveries;
-        private System.Windows.Forms.Button viewTransfers;
         private System.Windows.Forms.DataGridView CountTable;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem visibilityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unhideAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem swapShownHiddenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showConfirmedConfirmedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showRecountToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showCriticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideAllReviewedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideOnReviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transfersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bulkActionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoConfirmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ACL01ToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ACL05ToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem ACL1ToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem autoCriticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ACG1ToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem ACG3ToolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem ACG5ToolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem confirmAllUnreviewedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recountAllUnreviewedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem criticalAllUnreviewedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearAllReviewsToolStripMenuItem;
+        private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.ToolStripMenuItem addDeliveryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addTransferToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageDeliveriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageTransfersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem displayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToFileToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockName;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn Expected;
         private System.Windows.Forms.DataGridViewTextBoxColumn Counted;
         private System.Windows.Forms.DataGridViewTextBoxColumn Variance;
+        private System.Windows.Forms.DataGridViewButtonColumn ShowHide;
+        private System.Windows.Forms.DataGridViewButtonColumn Confirm;
+        private System.Windows.Forms.DataGridViewButtonColumn Recount;
+        private System.Windows.Forms.DataGridViewButtonColumn Critical;
+        private System.Windows.Forms.DataGridViewButtonColumn Notes;
+        private System.Windows.Forms.ToolStripMenuItem resetSortingToolStripMenuItem;
     }
 }

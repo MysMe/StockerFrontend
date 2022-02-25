@@ -47,6 +47,16 @@ namespace StockerFrontend.Natives
                 Marshal.PtrToStringAnsi(stockTable_getStockSize(table, index));
         }
 
+        public string GetName(uint index)
+        {
+            return Marshal.PtrToStringAnsi(stockTable_getStockName(table, index));
+        }
+
+        public string GetSize(uint index)
+        {
+            return Marshal.PtrToStringAnsi(stockTable_getStockSize(table, index));
+        }
+
         public IntPtr Ptr()
         {
             return table;

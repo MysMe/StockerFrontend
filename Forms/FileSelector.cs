@@ -17,11 +17,13 @@ namespace StockerFrontend
     {
         UnifiedTable unified = new UnifiedTable();
         StockCountTable count = new StockCountTable();
-        uint translationIndex = 0;
 
-        public FileSelector()
+        public FileSelector(UnifiedTable unified, StockCountTable count)
         {
+            this.unified = unified;
+            this.count = count;
             InitializeComponent();
+            DialogResult = DialogResult.Cancel;
         }
 
         private static string? getFile()
@@ -35,30 +37,6 @@ namespace StockerFrontend
             return null;
         }
 
-        private void Log(string text)
-        {
-            parseOutputBox.Text += text + "\r\n";
-        }
-
-        private void PrintTranslation()
-        {
-            //The progress bar is forcefully animated but only forwards.
-            //By setting it higher than the real value then moving it backwards, there is no animation
-            //and it jumps to the correct postion.
-            //Additionally, the bar throws if the index is out of range.
-            if (translationIndex + 2 <= unified.GetTranslationCount())
-                TranslationProgress.Value = (int)translationIndex + 2;
-
-            TranslationProgress.Value = (int)translationIndex + 1;
-
-            ProgressLabel.Text = (translationIndex + 1) + "/" + unified.GetTranslationCount();
-
-            var translation = unified.GetTranslation(translationIndex);
-            StockCountName.Text = count.GetNameSize(translation.CountIndex);
-            UnifiedName.Text= unified.GetNameSize(translation.UnifiedIndex);
-            TranslationInput.Text = "1";
-        }
-
         private void SelectCountButton_Click(object sender, EventArgs e)
         {
             string? file = getFile();
@@ -66,14 +44,12 @@ namespace StockerFrontend
             {
                 if (count.Load(file) == 0)
                 {
-                    Log("Stock count parsed successfully.");
                     SelectStockFile.Enabled = true;
                     SelectCountButton.Enabled = false;
                 }
                 else
                 {
-                    Log("Failed to parse stock count.");
-                    SelectStockFile.Enabled = false;
+                    MessageBox.Show("Unable to parse count file.");
                 }
             }
         }
@@ -86,50 +62,25 @@ namespace StockerFrontend
                 int res = unified.load(file, count);
                 if (res == 1)
                 {
-                    Log("Unified table parsed successfully, all translations present.");
-                    SelectStockFile.Enabled = false;
-                    resolveTranslationButton.Enabled = false;
-                    doneButton.Enabled = true;
+                    //All translations present
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
                 else if (res == -1)
                 {
-                    Log("Unable to parse input XLS file.");
-                    resolveTranslationButton.Enabled = false;
-                    doneButton.Enabled = false;
+                    //Error
+                    MessageBox.Show("Unable to parse input XLS file.");
                 }
                 else
                 {
-                    Log("Unified table parsed successfully, translations required.");
-                    SelectStockFile.Enabled = false;
-                    resolveTranslationButton.Enabled = true;
-                    doneButton.Enabled = false;
-                    TranslationProgress.Maximum = (int)unified.GetTranslationCount();
-                    PrintTranslation();
+                    //Translations required
+                    TranslationManager form = new TranslationManager(unified, count);
+                    this.Hide();
+                    form.ShowDialog();
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
-        }
-
-        private void TranslationConfirm_Click(object sender, EventArgs e)
-        {
-            unified.ProvideTranslation(translationIndex, float.Parse(TranslationInput.Text), count.Ptr());
-            translationIndex++;
-            if (translationIndex != unified.GetTranslationCount())
-            {
-                PrintTranslation();
-            }
-            else
-            {
-                unified.ApplyTranslations(count.Ptr());
-                resolveTranslationButton.Enabled = false;
-                TranslationConfirm.Enabled = false;
-                doneButton.Enabled = true;
-            }
-        }
-
-        private void doneButton_Click(object sender, EventArgs e)
-        {
-            StockOverview form = new StockOverview(unified, count);
-            form.Show();
         }
     }
 }
