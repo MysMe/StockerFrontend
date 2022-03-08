@@ -294,7 +294,7 @@ namespace StockerFrontend.Forms
             foreach (var i in entries)
             {
                 if (i.Status == UnifiedEntry.status.normal &&
-                    i.GetVariance() <= 0.1)
+                    Math.Abs(i.GetVariance()) <= 0.1)
                     i.Status = UnifiedEntry.status.confirmed;
             }
             Regenerate();
@@ -305,7 +305,7 @@ namespace StockerFrontend.Forms
             foreach (var i in entries)
             {
                 if (i.Status == UnifiedEntry.status.normal &&
-                    i.GetVariance() <= 0.5)
+                    Math.Abs(i.GetVariance()) <= 0.5)
                     i.Status = UnifiedEntry.status.confirmed;
             }
             Regenerate();
@@ -316,7 +316,7 @@ namespace StockerFrontend.Forms
             foreach (var i in entries)
             {
                 if (i.Status == UnifiedEntry.status.normal &&
-                    i.GetVariance() <= 1)
+                    Math.Abs(i.GetVariance()) <= 1)
                     i.Status = UnifiedEntry.status.confirmed;
             }
             Regenerate();
@@ -327,7 +327,7 @@ namespace StockerFrontend.Forms
             foreach (var i in entries)
             {
                 if (i.Status == UnifiedEntry.status.normal &&
-                    i.GetVariance() >= 1)
+                    Math.Abs(i.GetVariance()) >= 1)
                     i.Status = UnifiedEntry.status.critical;
             }
             Regenerate();
@@ -338,7 +338,7 @@ namespace StockerFrontend.Forms
             foreach (var i in entries)
             {
                 if (i.Status == UnifiedEntry.status.normal &&
-                    i.GetVariance() >= 3)
+                    Math.Abs(i.GetVariance()) >= 3)
                     i.Status = UnifiedEntry.status.critical;
             }
             Regenerate();
@@ -349,7 +349,7 @@ namespace StockerFrontend.Forms
             foreach (var i in entries)
             {
                 if (i.Status == UnifiedEntry.status.normal &&
-                    i.GetVariance() >= 5)
+                    Math.Abs(i.GetVariance()) >= 5)
                     i.Status = UnifiedEntry.status.critical;
             }
             Regenerate();
