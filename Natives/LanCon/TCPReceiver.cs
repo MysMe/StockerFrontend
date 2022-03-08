@@ -34,6 +34,11 @@ namespace StockerFrontend.Natives.LanCon
                 return "";
             return ret;
         }
+
+        public override string ToString()
+        {
+            return Contents();
+        }
     }
     public class TCPReceiver
     {
@@ -55,6 +60,9 @@ namespace StockerFrontend.Natives.LanCon
         private static extern void TCPReceiver_clear_message(IntPtr obj);
 
 
+        [DllImport("LanCon.dll")]
+        private static extern double TCPReceiver_get_message_percentage(IntPtr obj);
+
         public TCPReceiver(ushort port)
         {
             obj = TCPReceiver_new(port);
@@ -65,7 +73,8 @@ namespace StockerFrontend.Natives.LanCon
             TCPReceiver_delete(obj);
         }
 
-        public TCPReceiverContent AwaitAccept(ushort timeoutMS)
+        //Returns either null or a string wrapper containing the address of the accepted endpoint
+        public TCPReceiverContent? AwaitAccept(ushort timeoutMS)
         {
             return new TCPReceiverContent(TCPReceiver_await_accept_new(obj, timeoutMS));
         }
@@ -81,6 +90,11 @@ namespace StockerFrontend.Natives.LanCon
         public void ClearMessage()
         {
             TCPReceiver_clear_message(obj);
+        }
+
+        public double GetMessagePercentage()
+        {
+            return TCPReceiver_get_message_percentage(obj);
         }
     }
 }
