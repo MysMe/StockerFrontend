@@ -50,6 +50,7 @@
             this.hideAllReviewedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideOnReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllReviewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetSortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transfersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDeliveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,6 @@
             this.displayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchBox = new System.Windows.Forms.TextBox();
-            this.resetSortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.CountTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -302,6 +302,13 @@
             this.clearAllReviewsToolStripMenuItem.Text = "Clear All Reviews";
             this.clearAllReviewsToolStripMenuItem.Click += new System.EventHandler(this.clearAllReviewsToolStripMenuItem_Click);
             // 
+            // resetSortingToolStripMenuItem
+            // 
+            this.resetSortingToolStripMenuItem.Name = "resetSortingToolStripMenuItem";
+            this.resetSortingToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.resetSortingToolStripMenuItem.Text = "Reset Sorting";
+            this.resetSortingToolStripMenuItem.Click += new System.EventHandler(this.resetSortingToolStripMenuItem_Click);
+            // 
             // transfersToolStripMenuItem
             // 
             this.transfersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -470,13 +477,6 @@
             this.searchBox.TabIndex = 10;
             this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
             // 
-            // resetSortingToolStripMenuItem
-            // 
-            this.resetSortingToolStripMenuItem.Name = "resetSortingToolStripMenuItem";
-            this.resetSortingToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.resetSortingToolStripMenuItem.Text = "Reset Sorting";
-            this.resetSortingToolStripMenuItem.Click += new System.EventHandler(this.resetSortingToolStripMenuItem_Click);
-            // 
             // StockOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -486,6 +486,7 @@
             this.Controls.Add(this.searchBox);
             this.Controls.Add(this.CountTable);
             this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "StockOverview";
             this.Text = "StockOverview";

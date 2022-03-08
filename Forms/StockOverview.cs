@@ -138,6 +138,7 @@ namespace StockerFrontend.Forms
         public StockOverview()
         {
             InitializeComponent();
+            this.KeyPress += StockOverview_KeyPress;
             Hide();
             FileSelector selector = new FileSelector(unified, stockCount);
             if (selector.ShowDialog() != DialogResult.OK)
@@ -149,6 +150,42 @@ namespace StockerFrontend.Forms
             }
 
             Populate();
+        }
+
+        private void StockOverview_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (CountTable.Rows.Count == 0)
+                return;
+
+            int rowIndex = 0;
+            if (CountTable.SelectedCells.Count != 0)
+                rowIndex = CountTable.SelectedCells[0].RowIndex;
+
+            switch (e.KeyChar)
+            {
+                default:
+                    return;
+
+                case (char)Keys.D4:
+                    ActOnRow(rowIndex, Columns.hide);
+                    return;
+
+                case (char)Keys.D1:
+                    ActOnRow(rowIndex, Columns.confirm);
+                    break;
+
+                case (char)Keys.D2:
+                    ActOnRow(rowIndex, Columns.recount);
+                    break;
+
+                case (char)Keys.D3:
+                    ActOnRow(rowIndex, Columns.critical);
+                    break;
+
+                case (char)Keys.D5:
+                    ActOnRow(rowIndex, Columns.notes);
+                    break;
+            }
         }
 
         private void SetHideAndRemove(int index, bool hidden)
@@ -168,45 +205,50 @@ namespace StockerFrontend.Forms
             if (e.RowIndex == -1)
                 return;
 
-            string? contents = CountTable.Rows[e.RowIndex]
-                    .Cells[(int)Columns.id].Value
-                    .ToString();
+            ActOnRow(e.RowIndex, (Columns)e.ColumnIndex);
+        }
+
+        private void ActOnRow(int rowIndex, Columns action)
+        {
+            string? contents = CountTable.Rows[rowIndex]
+                .Cells[(int)Columns.id].Value
+                .ToString();
             if (contents == null)
                 return;
 
 
             int index = int.Parse(contents);
-            switch (e.ColumnIndex)
+            switch (action)
             {
                 default:
                     return;
 
-                case (int)Columns.hide:
+                case Columns.hide:
                     //If we are showing hidden items then unhide this one and vice versa
-                    SetHideAndRemove(e.RowIndex, !invertHiddenDisplay);
+                    SetHideAndRemove(rowIndex, !invertHiddenDisplay);
                     return;
 
-                case (int)Columns.confirm:
+                case Columns.confirm:
                     entries[index].Status = UnifiedEntry.status.confirmed;
                     break;
 
-                case (int)Columns.recount:
+                case Columns.recount:
                     entries[index].Status = UnifiedEntry.status.recount;
                     break;
 
-                case (int)Columns.critical:
+                case Columns.critical:
                     entries[index].Status = UnifiedEntry.status.critical;
                     break;
 
-                case (int)Columns.notes:
+                case Columns.notes:
                     AddNote form = new AddNote(entries[index]);
                     form.ShowDialog();
                     return;
             }
             if (autohide && !invertHiddenDisplay) //Do not autohide if hidden items are being displayed
-                SetHideAndRemove(e.RowIndex, true); //Otherwise, always hide if autohide is on
+                SetHideAndRemove(rowIndex, true); //Otherwise, always hide if autohide is on
             else
-                ApplyColour(e.RowIndex); //Don't apply colour changes to hidden rows
+                ApplyColour(rowIndex); //Don't apply colour changes to hidden rows
         }
 
         private void unhideAllToolStripMenuItem_Click(object sender, EventArgs e)
