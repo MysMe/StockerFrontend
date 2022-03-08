@@ -35,12 +35,16 @@ namespace StockerFrontend.Natives.LanCon
             UDPMessage_address_delete(str);
         }
 
-        public string Get()
+        public string Value()
         {
             string? val = Marshal.PtrToStringAnsi(str);
             if (val == null)
                 return "";
             return val;
+        }
+        public override string ToString()
+        {
+            return Value();
         }
     }
     public class UDPMessage
