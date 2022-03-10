@@ -31,11 +31,12 @@
             this.SelectCountButton = new System.Windows.Forms.Button();
             this.SelectStockFile = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
+            this.ReceiveCountButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SelectCountButton
             // 
-            this.SelectCountButton.Location = new System.Drawing.Point(0, 35);
+            this.SelectCountButton.Location = new System.Drawing.Point(12, 27);
             this.SelectCountButton.Name = "SelectCountButton";
             this.SelectCountButton.Size = new System.Drawing.Size(100, 50);
             this.SelectCountButton.TabIndex = 0;
@@ -46,7 +47,7 @@
             // SelectStockFile
             // 
             this.SelectStockFile.Enabled = false;
-            this.SelectStockFile.Location = new System.Drawing.Point(108, 35);
+            this.SelectStockFile.Location = new System.Drawing.Point(224, 27);
             this.SelectStockFile.Name = "SelectStockFile";
             this.SelectStockFile.Size = new System.Drawing.Size(100, 50);
             this.SelectStockFile.TabIndex = 1;
@@ -57,12 +58,21 @@
             // infoLabel
             // 
             this.infoLabel.AutoSize = true;
-            this.infoLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.infoLabel.Location = new System.Drawing.Point(0, 0);
+            this.infoLabel.Location = new System.Drawing.Point(12, 9);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(208, 30);
+            this.infoLabel.Size = new System.Drawing.Size(337, 15);
             this.infoLabel.TabIndex = 2;
-            this.infoLabel.Text = "To begin, please select a \r\nstock count file and a stock report file.";
+            this.infoLabel.Text = "To begin, please select a stock count file and a stock report file.";
+            // 
+            // ReceiveCountButton
+            // 
+            this.ReceiveCountButton.Location = new System.Drawing.Point(118, 27);
+            this.ReceiveCountButton.Name = "ReceiveCountButton";
+            this.ReceiveCountButton.Size = new System.Drawing.Size(100, 50);
+            this.ReceiveCountButton.TabIndex = 3;
+            this.ReceiveCountButton.Text = "Receive Count File";
+            this.ReceiveCountButton.UseVisualStyleBackColor = true;
+            this.ReceiveCountButton.Click += new System.EventHandler(this.ReceiveCountButton_Click);
             // 
             // FileSelector
             // 
@@ -70,7 +80,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(216, 97);
+            this.ClientSize = new System.Drawing.Size(350, 83);
+            this.Controls.Add(this.ReceiveCountButton);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.SelectStockFile);
             this.Controls.Add(this.SelectCountButton);
@@ -90,5 +101,6 @@
         private System.Windows.Forms.Button SelectCountButton;
         private System.Windows.Forms.Button SelectStockFile;
         private System.Windows.Forms.Label infoLabel;
+        private System.Windows.Forms.Button ReceiveCountButton;
     }
 }

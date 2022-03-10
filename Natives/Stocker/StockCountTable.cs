@@ -20,6 +20,9 @@ namespace StockerFrontend.Natives
         [DllImport("Stocker.dll")]
         private static extern int stockTable_reuse(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string file);
 
+        [DllImport("Stocker.dll")]
+        private static extern int stockTable_reuse_from_string(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string data);
+
         [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
         private static extern IntPtr stockTable_getStockName(IntPtr table, uint index);
 
@@ -39,6 +42,11 @@ namespace StockerFrontend.Natives
         public int Load(string file)
         {
             return stockTable_reuse(table, file);
+        }
+
+        public int LoadFromMemory(string data)
+        {
+            return stockTable_reuse_from_string(table, data);
         }
 
         public string GetNameSize(uint index)

@@ -25,80 +25,6 @@ namespace StockerFrontend
             this.unified = unified;
             this.count = count;
             InitializeComponent();
-
-            UDPListen form = new UDPListen();
-            form.Show();
-        }
-
-        private static void LanConTest()
-        {
-            UDPReceiver UDP = new UDPReceiver(40404);
-            UDPMessage? UDPM = null;
-            while (true)
-            {
-                UDPM = UDP.AwaitMessage(500);
-                if (UDPM != null)
-                {
-                    if (UDPM.GetRequest() == UDPRequest.requestAddress)
-                    {
-                        Console.Write("!");
-                    }
-                    else if (UDPM.GetRequest() == UDPRequest.requestLink)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.Write("?");
-                    }
-                }
-                else
-                {
-                    Console.Write(".");
-                }
-            }
-
-            Console.WriteLine("");
-            Console.WriteLine(UDPM.GetAddress().ToString() + " would like to open a link, accept? [Y/N]");
-            char key = '\0';
-            do
-            {
-                key = (char)Console.Read();
-            } while (key != 'Y' && key != 'N');
-            if (key == 'N')
-            {
-                UDP.Respond(UDPM, UDPRequest.denyLink);
-                Console.WriteLine("Connection denied.");
-                return;
-            }
-
-            Console.WriteLine("Accepted link, awaiting connection.");
-
-            TCPReceiver TCP = new TCPReceiver(UDPM.GetAdditional());
-
-            TCPReceiverContent? content = null;
-
-
-            UDP.Respond(UDPM, UDPRequest.acceptLink);
-            while ((content = TCP.AwaitAccept(1000)) == null)
-            {
-                Console.Write(".");
-                UDP.Respond(UDPM, UDPRequest.acceptLink);
-            }
-
-            Console.WriteLine("");
-            Console.WriteLine(content.ToString() + " connected.");
-
-            content = null;
-            while ((content = TCP.AwaitMessage(1000)) == null)
-            {
-                Console.Write(".");
-            }
-
-            Console.WriteLine("");
-            Console.WriteLine("Received: ");
-            Console.WriteLine(content.ToString());
-            return;
         }
 
         private static string? getFile()
@@ -121,6 +47,7 @@ namespace StockerFrontend
                 {
                     SelectStockFile.Enabled = true;
                     SelectCountButton.Enabled = false;
+                    ReceiveCountButton.Enabled = false;
                 }
                 else
                 {
@@ -155,6 +82,34 @@ namespace StockerFrontend
                     DialogResult = DialogResult.OK;
                     Close();
                 }
+            }
+        }
+
+        private void ReceiveCountButton_Click(object sender, EventArgs e)
+        {
+            UDPListen form = new UDPListen();
+            form.ShowDialog();
+
+            if (form.receiver == null || form.message == null)
+                return;
+
+
+            var form1 = new MessageReceive(form.receiver, form.message, form.message.GetAdditional());
+            form1.ShowDialog();
+
+            string? contents = form1.output;
+            if (contents == null)
+                return;
+
+            if (count.LoadFromMemory(contents) == 0)
+            {
+                SelectStockFile.Enabled = true;
+                SelectCountButton.Enabled = false;
+                ReceiveCountButton.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Unable to parse count file.");
             }
         }
     }

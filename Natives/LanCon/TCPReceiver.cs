@@ -76,7 +76,10 @@ namespace StockerFrontend.Natives.LanCon
         //Returns either null or a string wrapper containing the address of the accepted endpoint
         public TCPReceiverContent? AwaitAccept(ushort timeoutMS)
         {
-            return new TCPReceiverContent(TCPReceiver_await_accept_new(obj, timeoutMS));
+            IntPtr v = TCPReceiver_await_accept_new(obj, timeoutMS);
+            if (v == IntPtr.Zero)
+                return null;
+            return new TCPReceiverContent(v);
         }
 
         public TCPReceiverContent? AwaitMessage(ushort timeoutMS)

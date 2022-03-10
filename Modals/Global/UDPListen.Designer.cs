@@ -79,6 +79,7 @@
             this.Stop.TabIndex = 4;
             this.Stop.Text = "Stop";
             this.Stop.UseVisualStyleBackColor = true;
+            this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
             // UDPListen
             // 
