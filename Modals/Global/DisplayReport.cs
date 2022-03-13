@@ -20,7 +20,10 @@ namespace StockerFrontend.Modals.Global
             {
                 var columns = line.Split(',');
                 while (columns.Length > reportDisplay.Columns.Count)
+                {
                     reportDisplay.Columns.Add("", "");
+                    reportDisplay.Columns[reportDisplay.Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                }
 
                 reportDisplay.Rows.Add(columns);
             }

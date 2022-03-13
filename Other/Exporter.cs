@@ -10,6 +10,18 @@ namespace StockerFrontend.Other
 {
     public class Exporter
     {
+
+        public enum Mode
+        {
+            Ordered     = 0b000000,
+            Categorised = 0b000001,
+            Normal      = 0b000010,
+            Confirmed   = 0b000100,
+            Recount     = 0b001000,
+            Critical    = 0b010000,
+            Transfers   = 0b100000
+        }
+
         private static void AppendHeader(StringBuilder sb)
         {
             sb.AppendLine("Product Name,Size,Count,Variance,Notes");
@@ -73,61 +85,70 @@ namespace StockerFrontend.Other
             sb.AppendLine("");
         }
 
-        public static string Export(List<UnifiedEntry> entries, List<Delivery> deliveries, List<Transfer> transfers)
+        private static bool ModeIncludes(UnifiedEntry.status status, Mode mode)
         {
+            switch(status)
+            {
+                case UnifiedEntry.status.normal:
+                    return (mode & Mode.Normal) != 0;
+                case UnifiedEntry.status.confirmed:
+                    return (mode & Mode.Confirmed) != 0;
+                case UnifiedEntry.status.recount:
+                    return (mode & Mode.Recount) != 0;
+                case UnifiedEntry.status.critical:
+                    return (mode & Mode.Critical) != 0;
+                default:
+                    return false;
+            }
+        }
 
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("Stock Count Report:");
-
-            bool hasbrittenCriticalHeader = false;
+        private static void ExportOrdered(List<UnifiedEntry> entries, StringBuilder sb, Mode mode)
+        {
             foreach (UnifiedEntry entry in entries)
             {
-                if (entry.Status == UnifiedEntry.status.critical)
+                if (ModeIncludes(entry.Status, mode))
+                    AppendEntry(entry, sb);
+            }
+        }
+
+        //Adds the header before the first element if any are added
+        //Does not add the header otherwise
+        //The header will automatically include the product table header
+        private static void ExportMatching(List<UnifiedEntry> entries, UnifiedEntry.status status, StringBuilder sb, string header)
+        {
+            bool hasWrittenHeader = false;
+            foreach (UnifiedEntry entry in entries)
+            {
+                if (entry.Status == status)
                 {
-                    if (!hasbrittenCriticalHeader)
+                    if (!hasWrittenHeader)
                     {
-                        sb.AppendLine("Critical products:");
+                        sb.AppendLine(header);
                         AppendHeader(sb);
-                        hasbrittenCriticalHeader = true;
+                        hasWrittenHeader = true;
                     }
                     AppendEntry(entry, sb);
                 }
             }
+        }
 
-            bool hasbrittenRecountHeader = false;
-            foreach (UnifiedEntry entry in entries)
-            {
-                if (entry.Status == UnifiedEntry.status.recount)
-                {
-                    if (!hasbrittenRecountHeader)
-                    {
-                        sb.AppendLine("Products due recount:");
-                        AppendHeader(sb);
-                        hasbrittenRecountHeader = true;
-                    }
-                    AppendEntry(entry, sb);
-                }
-            }
+        private static void ExportCategorised(List<UnifiedEntry> entries, StringBuilder sb, Mode mode)
+        {
+            if (ModeIncludes(UnifiedEntry.status.critical, mode))
+                ExportMatching(entries, UnifiedEntry.status.critical, sb, "Critical products:");
 
-            bool hasbrittenConfirmedHeader = false;
-            foreach (UnifiedEntry entry in entries)
-            {
-                if (entry.Status == UnifiedEntry.status.confirmed ||
-                    entry.Status == UnifiedEntry.status.normal)
-                {
-                    if (!hasbrittenConfirmedHeader)
-                    {
-                        sb.AppendLine("Products:");
-                        AppendHeader(sb);
-                        hasbrittenConfirmedHeader = true;
-                    }
-                    AppendEntry(entry, sb);
-                }
-            }
+            if (ModeIncludes(UnifiedEntry.status.recount, mode))
+                ExportMatching(entries, UnifiedEntry.status.recount, sb, "Recounted products:");
 
-            sb.AppendLine("");
+            if (ModeIncludes(UnifiedEntry.status.confirmed, mode))
+                ExportMatching(entries, UnifiedEntry.status.confirmed, sb, "Confirmed products:");
 
+            if (ModeIncludes(UnifiedEntry.status.normal, mode))
+                ExportMatching(entries, UnifiedEntry.status.normal, sb, "Normal products:");
+        }
+
+        private static void ExportTransfers(List<UnifiedEntry> entries, List<Delivery> deliveries, List<Transfer> transfers, StringBuilder sb)
+        {
             if (deliveries.Count > 0)
             {
                 sb.AppendLine("Deliveries:");
@@ -144,6 +165,27 @@ namespace StockerFrontend.Other
                 {
                     AppendTransfer(trx, sb, entries);
                 }
+            }
+
+        }
+
+        public static string Export(List<UnifiedEntry> entries, List<Delivery> deliveries, List<Transfer> transfers, Mode mode)
+        {
+
+            StringBuilder sb = new StringBuilder();
+
+            if ((Mode.Categorised & mode) != 0)
+            {
+                ExportCategorised(entries, sb, mode);
+            }
+            else
+            {
+                ExportOrdered(entries, sb, mode);
+            }
+
+            if ((Mode.Transfers & mode) != 0)
+            {
+                ExportTransfers(entries, deliveries, transfers, sb);
             }
 
             return sb.ToString();

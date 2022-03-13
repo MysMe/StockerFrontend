@@ -441,7 +441,9 @@ namespace StockerFrontend.Forms
 
         private void displayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayReport form = new DisplayReport(Exporter.Export(entries, deliveries, transfers));
+            DisplayReport form = new DisplayReport(Exporter.Export(entries, deliveries, transfers, 
+                Exporter.Mode.Categorised | Exporter.Mode.Normal | Exporter.Mode.Confirmed |
+                Exporter.Mode.Recount | Exporter.Mode.Critical));
             form.ShowDialog();
         }
 
@@ -456,7 +458,9 @@ namespace StockerFrontend.Forms
                 {
                     using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, Encoding.UTF8))
                     {
-                        sw.Write(Exporter.Export(entries, deliveries, transfers).ToString());
+                        sw.Write(Exporter.Export(entries, deliveries, transfers,
+                            Exporter.Mode.Categorised | Exporter.Mode.Normal | Exporter.Mode.Confirmed |
+                            Exporter.Mode.Recount | Exporter.Mode.Critical).ToString());
                         sw.Close();
                     }
                 }

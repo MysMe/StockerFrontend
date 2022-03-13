@@ -35,9 +35,7 @@
             // 
             // doneButton
             // 
-            this.doneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.doneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.doneButton.Location = new System.Drawing.Point(713, 415);
             this.doneButton.Name = "doneButton";
             this.doneButton.Size = new System.Drawing.Size(75, 23);
@@ -48,10 +46,21 @@
             // 
             // reportDisplay
             // 
+            this.reportDisplay.AllowUserToAddRows = false;
+            this.reportDisplay.AllowUserToDeleteRows = false;
+            this.reportDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.reportDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.reportDisplay.ColumnHeadersVisible = false;
             this.reportDisplay.Location = new System.Drawing.Point(12, 12);
             this.reportDisplay.Name = "reportDisplay";
+            this.reportDisplay.ReadOnly = true;
+            this.reportDisplay.RowHeadersVisible = false;
             this.reportDisplay.RowTemplate.Height = 25;
+            this.reportDisplay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.reportDisplay.ShowEditingIcon = false;
+            this.reportDisplay.ShowRowErrors = false;
             this.reportDisplay.Size = new System.Drawing.Size(776, 397);
             this.reportDisplay.TabIndex = 2;
             // 
