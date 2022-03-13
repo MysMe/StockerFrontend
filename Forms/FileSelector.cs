@@ -90,12 +90,23 @@ namespace StockerFrontend
             UDPListen form = new UDPListen();
             form.ShowDialog();
 
-            if (form.receiver == null || form.message == null)
+            if (form.receiver == null)
+            {
                 return;
+            }
+            if (form.message == null)
+            {
+                //Recover the socket so it can be reused
+                form.receiver.Destruct();
+                return;
+            }
 
 
             var form1 = new MessageReceive(form.receiver, form.message, form.message.GetAdditional());
             form1.ShowDialog();
+
+            //Recover the socket so it can be reused
+            form.receiver.Destruct();
 
             string? contents = form1.output;
             if (contents == null)

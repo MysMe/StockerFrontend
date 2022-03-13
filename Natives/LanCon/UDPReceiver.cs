@@ -49,5 +49,11 @@ namespace StockerFrontend.Natives.LanCon
                 return null;
             return new UDPMessage(v);
         }
+
+        public void Destruct()
+        {
+            UDPReceiver_delete(obj);
+            obj = IntPtr.Zero;
+        }
     }
 }

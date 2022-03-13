@@ -26,6 +26,7 @@ namespace StockerFrontend.Modals.Global
         {
             InitializeComponent();
             InitialiseBackgroundWorker();
+            FormClosing += new FormClosingEventHandler(UDPListen_FormClosing);
             worker.RunWorkerAsync();
         }
 
@@ -74,23 +75,26 @@ namespace StockerFrontend.Modals.Global
                             worker.ReportProgress(100);
                             return;
                         }
+                        else
+                        {
+                            receiver.Respond(message, UDPRequest.denyLink);
+                        }
                     }
                 }
             }
         }
 
-        private void StopWork()
+        private void UDPListen_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (worker.WorkerSupportsCancellation == true)
             {
                 worker.CancelAsync();
             }
-            Close();
         }
 
         private void Stop_Click(object sender, EventArgs e)
         {
-            StopWork();
+            Close();
         }
 
         // This event handler updates the progress bar.
@@ -99,7 +103,7 @@ namespace StockerFrontend.Modals.Global
         {
             if (e.ProgressPercentage == 100)
             {
-                StopWork();
+                Close();
             }
             else
             {

@@ -13,6 +13,7 @@ namespace StockerFrontend.Modals.Global
 {
     public partial class MessageReceive : Form
     {
+
         private UDPReceiver UDP;
         private UDPMessage target;
         private TCPReceiver TCP;
@@ -26,6 +27,8 @@ namespace StockerFrontend.Modals.Global
             target = host;
             InitializeComponent();
             InitialiseBackgroundWorker();
+            //Ensure the form cleans up its TCP port after use
+            FormClosing += new FormClosingEventHandler(MessageReceiver_FormClosing);
             worker.RunWorkerAsync();
         }
 
@@ -61,6 +64,14 @@ namespace StockerFrontend.Modals.Global
                     worker.ReportProgress(100);
                     worker.CancelAsync();
                 }
+                else
+                {
+                    if (TCP.Failed())
+                    {
+                        worker.ReportProgress(100);
+                        worker.CancelAsync();
+                    }    
+                }
             }
         }
 
@@ -74,16 +85,29 @@ namespace StockerFrontend.Modals.Global
             label1.Text = "Progress Completed: " + e.ProgressPercentage.ToString();
 
             if (e.ProgressPercentage == 100)
-                button1.Text = "Done";
+            {
+                if (output != null)
+                    button1.Text = "Done";
+                else
+                {
+                    button1.Text = "Ok";
+                    label1.Text = "Message failed to arrive.";
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void MessageReceiver_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (worker.WorkerSupportsCancellation == true)
             {
                 worker.CancelAsync();
             }
-            Close();
+            TCP.Destruct();
         }
     }
 }

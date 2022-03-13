@@ -59,5 +59,11 @@ namespace StockerFrontend.Natives.LanCon
         {
             TCPSender_send(obj, message);
         }
+
+        public void Destruct()
+        {
+            TCPSender_delete(obj);
+            obj = IntPtr.Zero;
+        }
     }
 }

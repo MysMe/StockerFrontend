@@ -59,9 +59,11 @@ namespace StockerFrontend.Natives.LanCon
         [DllImport("LanCon.dll")]
         private static extern void TCPReceiver_clear_message(IntPtr obj);
 
-
         [DllImport("LanCon.dll")]
         private static extern double TCPReceiver_get_message_percentage(IntPtr obj);
+
+        [DllImport("LanCon.dll")]
+        private static extern bool TCPReceiver_failed(IntPtr obj);
 
         public TCPReceiver(ushort port)
         {
@@ -98,6 +100,17 @@ namespace StockerFrontend.Natives.LanCon
         public double GetMessagePercentage()
         {
             return TCPReceiver_get_message_percentage(obj);
+        }
+
+        public bool Failed()
+        {
+            return TCPReceiver_failed(obj);
+        }
+
+        public void Destruct()
+        {
+            TCPReceiver_delete(obj);
+            obj = IntPtr.Zero;
         }
     }
 }
