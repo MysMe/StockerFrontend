@@ -30,9 +30,8 @@
         {
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.addressList = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.Stop = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
             // progressBar1
@@ -40,7 +39,7 @@
             this.progressBar1.Location = new System.Drawing.Point(12, 27);
             this.progressBar1.MarqueeAnimationSpeed = 1;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(611, 23);
+            this.progressBar1.Size = new System.Drawing.Size(337, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 0;
             // 
@@ -53,27 +52,9 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Your device is now waiting for connections on UDP port: ";
             // 
-            // addressList
-            // 
-            this.addressList.Location = new System.Drawing.Point(12, 71);
-            this.addressList.Multiline = true;
-            this.addressList.Name = "addressList";
-            this.addressList.ReadOnly = true;
-            this.addressList.Size = new System.Drawing.Size(611, 197);
-            this.addressList.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(264, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "So far, the following devices have been detected:";
-            // 
             // Stop
             // 
-            this.Stop.Location = new System.Drawing.Point(285, 274);
+            this.Stop.Location = new System.Drawing.Point(269, 56);
             this.Stop.Name = "Stop";
             this.Stop.Size = new System.Drawing.Size(80, 25);
             this.Stop.TabIndex = 4;
@@ -81,18 +62,30 @@
             this.Stop.UseVisualStyleBackColor = true;
             this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(356, 93);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
             // UDPListen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 311);
+            this.ClientSize = new System.Drawing.Size(356, 93);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.Stop);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.addressList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Name = "UDPListen";
-            this.Text = "UDPListen";
+            this.Text = "Listening For Connections";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,8 +95,7 @@
 
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox addressList;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Stop;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

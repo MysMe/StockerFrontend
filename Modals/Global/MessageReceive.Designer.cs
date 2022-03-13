@@ -70,7 +70,7 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
             this.Name = "MessageReceive";
-            this.Text = "MessageReceive";
+            this.Text = "Receiving Data";
             this.ResumeLayout(false);
             this.PerformLayout();
 

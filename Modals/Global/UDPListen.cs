@@ -18,6 +18,8 @@ namespace StockerFrontend.Modals.Global
         public UDPReceiver? receiver = null;
         public UDPMessage? message = null;
 
+        private ushort UDPPort = 40404;
+
         public string? output = null;
 
         List<string> addresses = new List<string>();
@@ -28,6 +30,7 @@ namespace StockerFrontend.Modals.Global
             InitialiseBackgroundWorker();
             FormClosing += new FormClosingEventHandler(UDPListen_FormClosing);
             worker.RunWorkerAsync();
+            label1.Text += UDPPort.ToString();
         }
 
         ~UDPListen()
@@ -49,7 +52,7 @@ namespace StockerFrontend.Modals.Global
             if (worker == null)
                 return;
 
-            receiver = new UDPReceiver(40404);
+            receiver = new UDPReceiver(UDPPort);
             message = null;
 
             while (worker.CancellationPending == false)
@@ -104,14 +107,6 @@ namespace StockerFrontend.Modals.Global
             if (e.ProgressPercentage == 100)
             {
                 Close();
-            }
-            else
-            {
-                addressList.Text = "";
-                foreach (var i in addresses)
-                {
-                    addressList.Text += i + "\r\n";
-                }
             }
         }
     }
