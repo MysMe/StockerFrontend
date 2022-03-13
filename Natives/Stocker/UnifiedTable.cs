@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +15,7 @@ namespace StockerFrontend.Natives
         public uint CountIndex = 0;
     }
 
+    [Serializable()]
     public class UnifiedEntry
     {
 
@@ -35,6 +38,22 @@ namespace StockerFrontend.Natives
         public float Transferred = 0;
         public float Delivered = 0;
 
+        public void Pack(StringBuilder sb)
+        {
+            sb.AppendLine(Name);
+            sb.AppendLine(Size);
+            sb.AppendLine(Count.ToString());
+            sb.AppendLine(Variance.ToString());
+            sb.AppendLine(isHidden.ToString());
+            sb.AppendLine(Status.ToString());
+            sb.AppendLine(notes);
+        }
+
+        public UnifiedEntry(StringReader sr)
+        {
+
+        }
+
         public float GetCount()
         {
             return Count;
@@ -49,6 +68,8 @@ namespace StockerFrontend.Natives
         {
             return GetCount() - GetExpected();
         }
+
+        private UnifiedEntry() { }
 
         public UnifiedEntry(UnifiedTable table, uint index)
         {

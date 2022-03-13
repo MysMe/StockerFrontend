@@ -51,6 +51,13 @@ namespace StockerFrontend.Forms
             {
                 entries.Add(unified.Get(i));
             }
+
+            {
+                FileFormer former = new FileFormer();
+                string text = former.Form(entries);
+                var res = former.Deform(text);
+            }
+
             lookup = new LookupTable(unified);
             Regenerate();
         }

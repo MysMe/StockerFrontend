@@ -2,6 +2,7 @@
 using StockerFrontend.Modals.Global;
 using StockerFrontend.Natives;
 using StockerFrontend.Natives.LanCon;
+using StockerFrontend.Other;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
