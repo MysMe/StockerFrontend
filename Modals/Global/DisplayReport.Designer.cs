@@ -30,6 +30,7 @@
         {
             this.doneButton = new System.Windows.Forms.Button();
             this.reportDisplay = new System.Windows.Forms.DataGridView();
+            this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.reportDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +65,22 @@
             this.reportDisplay.Size = new System.Drawing.Size(776, 397);
             this.reportDisplay.TabIndex = 2;
             // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(632, 415);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 3;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
             // DisplayReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.reportDisplay);
             this.Controls.Add(this.doneButton);
             this.Name = "DisplayReport";
@@ -81,5 +93,6 @@
         #endregion
         private System.Windows.Forms.Button doneButton;
         private System.Windows.Forms.DataGridView reportDisplay;
+        private System.Windows.Forms.Button saveButton;
     }
 }

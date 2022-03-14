@@ -20,11 +20,11 @@ namespace StockerFrontend
     {
         UnifiedTable unified = new UnifiedTable();
         StockCountTable count = new StockCountTable();
+        public bool deferLoad = false;
 
-        public FileSelector(UnifiedTable unified, StockCountTable count)
+        public FileSelector(UnifiedTable unified)
         {
             this.unified = unified;
-            this.count = count;
             InitializeComponent();
         }
 
@@ -123,6 +123,12 @@ namespace StockerFrontend
             {
                 MessageBox.Show("Unable to parse count file.");
             }
+        }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            deferLoad = true;
+            Close();
         }
     }
 }

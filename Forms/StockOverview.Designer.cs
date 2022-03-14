@@ -41,6 +41,9 @@
             this.Critical = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Notes = new System.Windows.Forms.DataGridViewButtonColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visibilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unhideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.swapShownHiddenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,8 +72,8 @@
             this.recountAllUnreviewedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.criticalAllUnreviewedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.displayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.basicReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.CountTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -203,6 +206,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
             this.visibilityToolStripMenuItem,
             this.transfersToolStripMenuItem,
             this.bulkActionsToolStripMenuItem,
@@ -212,6 +216,29 @@
             this.menuStrip1.Size = new System.Drawing.Size(1246, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // visibilityToolStripMenuItem
             // 
@@ -446,25 +473,25 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.displayToolStripMenuItem,
-            this.saveToFileToolStripMenuItem});
+            this.basicReportToolStripMenuItem,
+            this.customReportToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.exportToolStripMenuItem.Text = "Report";
             // 
-            // displayToolStripMenuItem
+            // basicReportToolStripMenuItem
             // 
-            this.displayToolStripMenuItem.Name = "displayToolStripMenuItem";
-            this.displayToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.displayToolStripMenuItem.Text = "Display";
-            this.displayToolStripMenuItem.Click += new System.EventHandler(this.displayToolStripMenuItem_Click);
+            this.basicReportToolStripMenuItem.Name = "basicReportToolStripMenuItem";
+            this.basicReportToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.basicReportToolStripMenuItem.Text = "Basic Report";
+            this.basicReportToolStripMenuItem.Click += new System.EventHandler(this.basicReportToolStripMenuItem_Click);
             // 
-            // saveToFileToolStripMenuItem
+            // customReportToolStripMenuItem
             // 
-            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
-            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.saveToFileToolStripMenuItem.Text = "Save To File";
-            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.saveToFileToolStripMenuItem_Click);
+            this.customReportToolStripMenuItem.Name = "customReportToolStripMenuItem";
+            this.customReportToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.customReportToolStripMenuItem.Text = "Custom Report";
+            this.customReportToolStripMenuItem.Click += new System.EventHandler(this.customReportToolStripMenuItem_Click);
             // 
             // searchBox
             // 
@@ -530,8 +557,6 @@
         private System.Windows.Forms.ToolStripMenuItem manageDeliveriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageTransfersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem displayToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToFileToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockName;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockSize;
@@ -544,5 +569,10 @@
         private System.Windows.Forms.DataGridViewButtonColumn Critical;
         private System.Windows.Forms.DataGridViewButtonColumn Notes;
         private System.Windows.Forms.ToolStripMenuItem resetSortingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem basicReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customReportToolStripMenuItem;
     }
 }

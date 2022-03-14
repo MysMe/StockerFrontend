@@ -19,7 +19,6 @@ namespace StockerFrontend.Forms
     public partial class StockOverview : Form
     {
         private UnifiedTable unified = new UnifiedTable();
-        private StockCountTable stockCount = new StockCountTable();
         private List<UnifiedEntry> entries = new List<UnifiedEntry>();
         private LookupTable lookup = new LookupTable();
 
@@ -50,12 +49,6 @@ namespace StockerFrontend.Forms
             for (uint i = 0;i < unified.Count(); i++)
             {
                 entries.Add(unified.Get(i));
-            }
-
-            {
-                FileFormer former = new FileFormer();
-                string text = former.Form(entries);
-                var res = former.Deform(text);
             }
 
             lookup = new LookupTable(unified);
@@ -147,13 +140,29 @@ namespace StockerFrontend.Forms
             InitializeComponent();
             this.KeyPress += StockOverview_KeyPress;
             Hide();
-            FileSelector selector = new FileSelector(unified, stockCount);
-            if (selector.ShowDialog() != DialogResult.OK)
+            while (true)
             {
-                //Closing a fowm calls dispose(), which requires a fully constructed object
-                //As such, it is impossible to close a form directly from the constructor
-                //Instead, we add an event to the load handler, which is invoked immediately after the constructor completes
-                Load += (s, e) => Close();
+                FileSelector selector = new FileSelector(unified);
+                if (selector.ShowDialog() != DialogResult.OK)
+                {
+                    if (selector.deferLoad)
+                    {
+                        if (!load())
+                            continue;
+                        else
+                            break;
+                    }
+                    else
+                    {
+                        //Closing a fowm calls dispose(), which requires a fully constructed object
+                        //As such, it is impossible to close a form directly from the constructor
+                        //Instead, we add an event to the load handler, which is invoked immediately after the constructor completes
+                        Load += (s, e) => Close();
+                        return;
+                    }
+                }
+                else
+                    break;
             }
 
             Populate();
@@ -495,6 +504,65 @@ namespace StockerFrontend.Forms
         private void resetSortingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CountTable.Sort(CountTable.Columns[0], ListSortDirection.Ascending);
+        }
+
+        private void basicReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayReport form = new DisplayReport(Exporter.Export(entries, deliveries, transfers,
+                Exporter.Mode.Categorised | Exporter.Mode.Normal | Exporter.Mode.Confirmed |
+                Exporter.Mode.Recount | Exporter.Mode.Critical));
+            form.ShowDialog();
+        }
+
+        private void customReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CustomiseReport form1 = new CustomiseReport();
+            var result = form1.ShowDialog();
+            if (result == DialogResult.Cancel)
+                return;
+
+            DisplayReport form2 = new DisplayReport(Exporter.Export(
+                entries, deliveries, transfers, form1.mode));
+            form2.ShowDialog();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            DialogResult res = save.ShowDialog();
+            if (res != DialogResult.OK)
+                return;
+            StreamWriter sw = new StreamWriter(save.FileName);
+            FileFormer.Form(sw, unified, entries, deliveries, transfers);
+        }
+
+        private bool load()
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            DialogResult res = open.ShowDialog();
+            if (res != DialogResult.OK)
+                return false;
+
+            StreamReader sr = new StreamReader(open.FileName);
+            var data = FileFormer.Deform(sr);
+            if (data == null)
+                return false;
+
+            unified = data.table;
+            Regenerate();
+            deliveries = data.deliveries;
+            transfers = data.transfers;
+
+            foreach (Delivery del in deliveries)
+                del.Apply(entries);
+            foreach (Transfer trx in transfers)
+                trx.Apply(entries);
+            return true;
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            load();
         }
     }
 }

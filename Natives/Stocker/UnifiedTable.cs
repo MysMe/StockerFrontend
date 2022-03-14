@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockerFrontend.Other;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,11 +16,10 @@ namespace StockerFrontend.Natives
         public uint CountIndex = 0;
     }
 
-    [Serializable()]
     public class UnifiedEntry
     {
 
-        public enum status
+        public enum status : int
         {
             normal,
             confirmed,
@@ -37,17 +37,6 @@ namespace StockerFrontend.Natives
 
         public float Transferred = 0;
         public float Delivered = 0;
-
-        public void Pack(StringBuilder sb)
-        {
-            sb.AppendLine(Name);
-            sb.AppendLine(Size);
-            sb.AppendLine(Count.ToString());
-            sb.AppendLine(Variance.ToString());
-            sb.AppendLine(isHidden.ToString());
-            sb.AppendLine(Status.ToString());
-            sb.AppendLine(notes);
-        }
 
         public UnifiedEntry(StringReader sr)
         {
@@ -145,6 +134,16 @@ namespace StockerFrontend.Natives
 
         [DllImport("Stocker.dll")]
         private static extern float unifiedTable_getTranslationFromName(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string product);
+
+
+        [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
+        private static extern IntPtr unifiedTable_toData_new(IntPtr table);
+
+        [DllImport("Stocker.dll")]
+        private static extern void unifiedTable_toData_delete(IntPtr data);
+
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_fromData(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string data);
 
         private IntPtr table = IntPtr.Zero;
 
@@ -254,6 +253,39 @@ namespace StockerFrontend.Natives
         public IntPtr Ptr()
         {
             return table;
+        }
+
+        public class TableString
+        {
+            private IntPtr ptr = IntPtr.Zero;
+
+            public TableString(IntPtr ptr)
+            {
+                this.ptr = ptr;
+            }
+
+            ~TableString()
+            {
+                unifiedTable_toData_delete(ptr);
+            }
+
+            public string Get()
+            {
+                string? v = Marshal.PtrToStringUTF8(ptr);
+                if (v == null)
+                    return "";
+                return v;
+            }
+        }
+
+        public TableString SaveToString()
+        {
+            return new TableString(unifiedTable_toData_new(table));
+        }
+
+        public bool LoadFromString(string contents)
+        {
+            return unifiedTable_fromData(table, contents);
         }
 
     }

@@ -13,6 +13,7 @@ namespace StockerFrontend.Other
 
         public enum Mode
         {
+            None        = 0,
             Ordered     = 0b000000,
             Categorised = 0b000001,
             Normal      = 0b000010,
