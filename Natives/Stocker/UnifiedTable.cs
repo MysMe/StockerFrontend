@@ -60,12 +60,17 @@ namespace StockerFrontend.Natives
 
         private UnifiedEntry() { }
 
-        public UnifiedEntry(UnifiedTable table, uint index)
+        public void update(UnifiedTable table, uint index)
         {
             Name = table.GetName(index);
             Size = table.GetSize(index);
             Count = table.GetCount(index);
             Variance = table.GetVariance(index);
+        }
+
+        public UnifiedEntry(UnifiedTable table, uint index)
+        {
+            update(table, index);
         }
     }
 
@@ -144,6 +149,9 @@ namespace StockerFrontend.Natives
 
         [DllImport("Stocker.dll")]
         private static extern bool unifiedTable_fromData(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string data);
+
+        [DllImport("Stocker.dll")]
+        private static extern void unifiedTable_provideRecount(IntPtr data, uint index, float val);
 
         private IntPtr table = IntPtr.Zero;
 
@@ -286,6 +294,11 @@ namespace StockerFrontend.Natives
         public bool LoadFromString(string contents)
         {
             return unifiedTable_fromData(table, contents);
+        }
+
+        public void provideRecount(uint index, float newVal)
+        {
+            unifiedTable_provideRecount(table, index, newVal);
         }
 
     }

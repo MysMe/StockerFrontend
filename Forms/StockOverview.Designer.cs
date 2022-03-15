@@ -44,6 +44,9 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importRecountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromNetworkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visibilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unhideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.swapShownHiddenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -221,7 +224,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.loadToolStripMenuItem});
+            this.loadToolStripMenuItem,
+            this.importRecountToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -239,6 +243,29 @@
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // importRecountToolStripMenuItem
+            // 
+            this.importRecountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fromFileToolStripMenuItem,
+            this.fromNetworkToolStripMenuItem});
+            this.importRecountToolStripMenuItem.Name = "importRecountToolStripMenuItem";
+            this.importRecountToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importRecountToolStripMenuItem.Text = "Import Recount";
+            // 
+            // fromFileToolStripMenuItem
+            // 
+            this.fromFileToolStripMenuItem.Name = "fromFileToolStripMenuItem";
+            this.fromFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fromFileToolStripMenuItem.Text = "From File";
+            this.fromFileToolStripMenuItem.Click += new System.EventHandler(this.fromFileToolStripMenuItem_Click);
+            // 
+            // fromNetworkToolStripMenuItem
+            // 
+            this.fromNetworkToolStripMenuItem.Name = "fromNetworkToolStripMenuItem";
+            this.fromNetworkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fromNetworkToolStripMenuItem.Text = "From Network";
+            this.fromNetworkToolStripMenuItem.Click += new System.EventHandler(this.fromNetworkToolStripMenuItem_Click);
             // 
             // visibilityToolStripMenuItem
             // 
@@ -574,5 +601,8 @@
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem basicReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importRecountToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fromFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fromNetworkToolStripMenuItem;
     }
 }

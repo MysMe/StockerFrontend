@@ -7,6 +7,41 @@ using System.Threading.Tasks;
 
 namespace StockerFrontend.Natives
 {
+
+    public class FullSearchResult
+    {
+        private IntPtr ptr = IntPtr.Zero;
+
+        [DllImport("Stocker.dll")]
+        private static extern void stockTable_fullSearch_delete(IntPtr ptr);
+
+        [DllImport("Stocker.dll")]
+        private static extern uint stockTable_fullSearch_first(IntPtr ptr);
+
+        [DllImport("Stocker.dll")]
+        private static extern uint stockTable_fullSearch_last(IntPtr ptr);
+
+        public FullSearchResult(IntPtr contents)
+        {
+            ptr = contents;
+        }
+
+        ~FullSearchResult()
+        {
+            stockTable_fullSearch_delete(ptr);
+        }
+
+        public uint First()
+        {
+            return stockTable_fullSearch_first(ptr);
+        }
+
+        public uint Last()
+        {
+            return stockTable_fullSearch_last(ptr);
+        }
+
+    }
     public class StockCountTable
     {
         IntPtr table = IntPtr.Zero;
@@ -28,6 +63,15 @@ namespace StockerFrontend.Natives
 
         [DllImport("Stocker.dll", CharSet = CharSet.Ansi)] //Returns a char*
         private static extern IntPtr stockTable_getStockSize(IntPtr table, uint index);
+
+        [DllImport("Stocker.dll")]
+        private static extern float stockTable_getStockCount(IntPtr table, uint index);
+
+        [DllImport("Stocker.dll")]
+        private static extern uint stockTable_entry_count(IntPtr table);
+
+        [DllImport("Stocker.dll")]
+        private static extern IntPtr stockTable_fullSearch_new(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string product);
 
         public StockCountTable()
         {
@@ -74,9 +118,24 @@ namespace StockerFrontend.Natives
             return v;
         }
 
+        public float GetCount(uint index)
+        {
+            return stockTable_getStockCount(table, index);
+        }
+
+        public uint GetEntryCount()
+        {
+            return stockTable_entry_count(table);
+        }
+
         public IntPtr Ptr()
         {
             return table;
+        }
+
+        public FullSearchResult FullSearch(string product)
+        {
+            return new FullSearchResult(stockTable_fullSearch_new(table, product));
         }
     }
 }

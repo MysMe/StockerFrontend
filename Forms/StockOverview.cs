@@ -46,6 +46,7 @@ namespace StockerFrontend.Forms
 
         private void Populate()
         {
+            entries.Clear();
             for (uint i = 0;i < unified.Count(); i++)
             {
                 entries.Add(unified.Get(i));
@@ -166,6 +167,13 @@ namespace StockerFrontend.Forms
             }
 
             Populate();
+
+            //Due to the order of window creation/destruction, this window is
+            //put at the back of all others (including other applications).
+            //Hence we minimise, update and maximise to force it back to the front
+            this.WindowState = FormWindowState.Minimized;
+            this.Show();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void StockOverview_KeyPress(object? sender, KeyPressEventArgs e)
@@ -566,6 +574,64 @@ namespace StockerFrontend.Forms
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             load();
+        }
+
+        private void ImportRecount(StockCountTable table) 
+        {
+            ManageRecount form = new ManageRecount(unified, lookup, table, entries);
+            form.ShowDialog();
+            Regenerate();
+        }
+
+        private void fromFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            if (file.ShowDialog() != DialogResult.OK)
+                return;
+            StockCountTable count = new StockCountTable();
+            if (count.Load(file.FileName) != 0)
+            {
+                MessageBox.Show("Unable to open file.", "Error");
+                return;
+            }
+            ImportRecount(count);
+        }
+
+        private void fromNetworkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UDPListen form = new UDPListen();
+            form.ShowDialog();
+
+            if (form.receiver == null)
+            {
+                return;
+            }
+            if (form.message == null)
+            {
+                //Recover the socket so it can be reused
+                form.receiver.Destruct();
+                return;
+            }
+
+
+            var form1 = new MessageReceive(form.receiver, form.message, form.message.GetAdditional());
+            form1.ShowDialog();
+
+            //Recover the socket so it can be reused
+            form.receiver.Destruct();
+
+            string? contents = form1.output;
+            if (contents == null)
+                return;
+
+            StockCountTable count = new StockCountTable();
+
+            if (count.LoadFromMemory(contents) != 0)
+            {
+                MessageBox.Show("Unable to parse count file.", "Error");
+                return;
+            }
+            ImportRecount(count);
         }
     }
 }
