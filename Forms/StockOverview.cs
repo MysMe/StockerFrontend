@@ -568,6 +568,9 @@ namespace StockerFrontend.Forms
                 del.Apply(entries);
             foreach (Transfer trx in transfers)
                 trx.Apply(entries);
+
+            unified.LoadTranslations(TranslationManager.translationFile);
+
             return true;
         }
 

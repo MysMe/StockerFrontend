@@ -19,7 +19,7 @@ namespace StockerFrontend.Forms
 
         private bool anyChanges = false;
 
-        private const string translationFile = "Translations.txt";
+        public const string translationFile = "Translations.txt";
 
         private void Populate()
         {

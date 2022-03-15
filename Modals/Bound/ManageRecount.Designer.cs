@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.doneButton = new System.Windows.Forms.Button();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OriginalCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doneButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,18 +52,8 @@
             this.dataGrid.RowHeadersVisible = false;
             this.dataGrid.RowTemplate.Height = 25;
             this.dataGrid.ShowEditingIcon = false;
-            this.dataGrid.Size = new System.Drawing.Size(556, 150);
+            this.dataGrid.Size = new System.Drawing.Size(694, 262);
             this.dataGrid.TabIndex = 0;
-            // 
-            // doneButton
-            // 
-            this.doneButton.Location = new System.Drawing.Point(713, 415);
-            this.doneButton.Name = "doneButton";
-            this.doneButton.Size = new System.Drawing.Size(75, 23);
-            this.doneButton.TabIndex = 1;
-            this.doneButton.Text = "Done";
-            this.doneButton.UseVisualStyleBackColor = true;
-            this.doneButton.Click += new System.EventHandler(this.doneButton_Click);
             // 
             // ProductName
             // 
@@ -97,11 +87,24 @@
             this.ProductID.ReadOnly = true;
             this.ProductID.Visible = false;
             // 
+            // doneButton
+            // 
+            this.doneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doneButton.Location = new System.Drawing.Point(631, 280);
+            this.doneButton.Name = "doneButton";
+            this.doneButton.Size = new System.Drawing.Size(75, 23);
+            this.doneButton.TabIndex = 1;
+            this.doneButton.Text = "Done";
+            this.doneButton.UseVisualStyleBackColor = true;
+            this.doneButton.Click += new System.EventHandler(this.doneButton_Click);
+            // 
             // ManageRecount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(723, 314);
             this.Controls.Add(this.doneButton);
             this.Controls.Add(this.dataGrid);
             this.Name = "ManageRecount";
