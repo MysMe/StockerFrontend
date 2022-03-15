@@ -17,20 +17,41 @@ namespace StockerFrontend.Forms
         private UnifiedTable unified = new UnifiedTable();
         private StockCountTable count = new StockCountTable();
 
+        private bool anyChanges = false;
+
         private const string translationFile = "Translations.txt";
 
         private void Populate()
         {
             translationList.Rows.Clear();
-            for (uint i = 0; i < unified.GetTranslationCount(); i++)
+            if (!unified.LoadTranslations(translationFile))
             {
-                var translation = unified.GetTranslation(i);
-                translationList.Rows.Add(
-                    i,
-                    unified.GetName(translation.UnifiedIndex) + Environment.NewLine + count.GetName(translation.CountIndex),
-                    unified.GetSize(translation.UnifiedIndex) + Environment.NewLine + count.GetSize(translation.CountIndex),
-                    1);
+                MessageBox.Show("Unable to load translation file");
+                for (uint i = 0; i < unified.GetTranslationCount(); i++)
+                {
+                    var translation = unified.GetTranslation(i);
+                    translationList.Rows.Add(
+                        i,
+                        unified.GetName(translation.UnifiedIndex) + Environment.NewLine + count.GetName(translation.CountIndex),
+                        unified.GetSize(translation.UnifiedIndex) + Environment.NewLine + count.GetSize(translation.CountIndex),
+                        0);
+                }
+                anyChanges = true;
             }
+            else
+            {
+
+                for (uint i = 0; i < unified.GetTranslationCount(); i++)
+                {
+                    var translation = unified.GetTranslation(i);
+                    translationList.Rows.Add(
+                        i,
+                        unified.GetName(translation.UnifiedIndex) + Environment.NewLine + count.GetName(translation.CountIndex),
+                        unified.GetSize(translation.UnifiedIndex) + Environment.NewLine + count.GetSize(translation.CountIndex),
+                        unified.GetTranslation(count.GetNameSize(translation.CountIndex)));
+                }
+            }
+
         }
 
         public TranslationManager(UnifiedTable unified, StockCountTable count)
@@ -43,46 +64,70 @@ namespace StockerFrontend.Forms
             Populate();
         }
 
-        private void loadButton_Click(object sender, EventArgs e)
+        private enum Check
         {
-            if (!unified.LoadTranslations(translationFile))
+            good, //All cells contain positive, non-zero values
+            notAllNumbers, //Some cells contain non-numeric values
+            notAllValid //All cells contain numeric values, but some are <= 0
+        }
+
+        private Check CheckContents()
+        {
+            for (int i = 0; i < translationList.Rows.Count; i++)
             {
-                MessageBox.Show("Unable to load translation file");
+                string? contents = translationList.Rows[i].Cells[3].Value.ToString();
+                if (contents == null)
+                    return Check.notAllNumbers;
+                float val;
+                if (!float.TryParse(contents, out val))
+                    return Check.notAllNumbers;
+                if (val <= 0)
+                    return Check.notAllValid;
             }
-            else
-            {
-                unified.ApplyTranslations(count.Ptr());
-                Close();
-            }
+            return Check.good;
         }
 
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(
-                "Warning: These translations will overwrite any saved translations. Continue?", 
-                "Confirm overwrite", 
-                MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (anyChanges)
             {
-                for (int i = 0; i < translationList.Rows.Count; i++)
+                var result = CheckContents();
+                if (result == Check.notAllNumbers)
                 {
-                    string? contents = translationList.Rows[i].Cells[0].Value.ToString();
-                    if (contents == null)
-                        continue;
-
-                    uint ID = uint.Parse(contents);
-
-                    contents = translationList.Rows[i].Cells[3].Value.ToString();
-                    if (contents == null)
-                        continue;
-
-                    float ratio = float.Parse(contents);
-
-                    unified.ProvideTranslation(ID, ratio, count.Ptr());
+                    MessageBox.Show("Error: All cells must contain numbers.");
+                    return;
                 }
-                unified.ApplyTranslations(count.Ptr());
-                unified.SaveTranslations(translationFile);
-                Close();
+                if (result == Check.notAllValid)
+                {
+                    if (MessageBox.Show(
+                        "Warning: Some translations have a value less than or equal to zero. Continue?",
+                        "Value Warning",
+                        MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                        return;
+                }
             }
+
+            for (int i = 0; i < translationList.Rows.Count; i++)
+            {
+                string? contents = translationList.Rows[i].Cells[0].Value.ToString();
+                if (contents == null)
+                    continue;
+
+                uint ID = uint.Parse(contents);
+
+                contents = translationList.Rows[i].Cells[3].Value.ToString();
+                if (contents == null)
+                    continue;
+
+                float ratio = float.Parse(contents);
+
+                unified.ProvideTranslation(ID, ratio, count.Ptr());
+            }
+
+            unified.ApplyTranslations(count.Ptr());
+            if (anyChanges)
+                unified.SaveTranslations(translationFile);
+            Close();
         }
     }
 }

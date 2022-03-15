@@ -36,7 +36,6 @@
             this.Product = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CountSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DoneButton = new System.Windows.Forms.Button();
-            this.loadButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.translationList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,23 +112,11 @@
             this.DoneButton.UseVisualStyleBackColor = true;
             this.DoneButton.Click += new System.EventHandler(this.DoneButton_Click);
             // 
-            // loadButton
-            // 
-            this.loadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.loadButton.Location = new System.Drawing.Point(632, 415);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(75, 23);
-            this.loadButton.TabIndex = 2;
-            this.loadButton.Text = "Load";
-            this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
-            // 
             // TranslationManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.loadButton);
             this.Controls.Add(this.DoneButton);
             this.Controls.Add(this.translationList);
             this.Name = "TranslationManager";
@@ -149,6 +136,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ratio;
-        private System.Windows.Forms.Button loadButton;
     }
 }
