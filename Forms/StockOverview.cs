@@ -532,8 +532,8 @@ namespace StockerFrontend.Forms
             DialogResult res = save.ShowDialog();
             if (res != DialogResult.OK)
                 return;
-            StreamWriter sw = new StreamWriter(save.FileName);
-            FileFormer.Form(sw, unified, entries, deliveries, transfers);
+            using (StreamWriter sw = new StreamWriter(save.FileName))
+                FileFormer.Form(sw, unified, entries, deliveries, transfers);
         }
 
         private bool load()
@@ -543,8 +543,11 @@ namespace StockerFrontend.Forms
             if (res != DialogResult.OK)
                 return false;
 
-            StreamReader sr = new StreamReader(open.FileName);
-            var data = FileFormer.Deform(sr);
+            FileFormer.FileData? data = null;
+
+            using (StreamReader sr = new StreamReader(open.FileName))
+                data = FileFormer.Deform(sr);
+
             if (data == null)
                 return false;
 

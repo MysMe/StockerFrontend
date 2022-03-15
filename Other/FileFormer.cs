@@ -57,8 +57,6 @@ namespace StockerFrontend.Other
 
             ret.table.LoadFromString(ReadString(sr));
 
-            string? v = sr.ReadLine();
-
             int count = int.Parse(sr.ReadLine());
             for (int i = 0; i < count; i++)
             {
