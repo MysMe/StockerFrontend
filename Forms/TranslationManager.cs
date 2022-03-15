@@ -61,6 +61,7 @@ namespace StockerFrontend.Forms
             InitializeComponent();
             translationList.Columns[1].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             translationList.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            translationList.KeyDown += new KeyEventHandler(dataGrid_KeyDown);
             Populate();
         }
 
@@ -69,6 +70,17 @@ namespace StockerFrontend.Forms
             good, //All cells contain positive, non-zero values
             notAllNumbers, //Some cells contain non-numeric values
             notAllValid //All cells contain numeric values, but some are <= 0
+        }
+
+        private void dataGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                translationList.CurrentCell = translationList[
+                    translationList.CurrentCell.ColumnIndex,
+                    translationList.CurrentCell.RowIndex + 1];
+            }
         }
 
         private Check CheckContents()
