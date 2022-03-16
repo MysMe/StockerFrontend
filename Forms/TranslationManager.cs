@@ -34,7 +34,7 @@ namespace StockerFrontend.Forms
                         i,
                         unified.GetName(translation.UnifiedIndex) + Environment.NewLine + count.GetName(translation.CountIndex),
                         unified.GetSize(translation.UnifiedIndex) + Environment.NewLine + count.GetSize(translation.CountIndex),
-                        0);
+                        UnifiedTable.suggestTranslation(unified.GetSize(translation.UnifiedIndex), count.GetSize(translation.CountIndex)));
                 }
                 anyChanges = true;
             }

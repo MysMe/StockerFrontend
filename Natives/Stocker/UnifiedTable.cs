@@ -153,6 +153,10 @@ namespace StockerFrontend.Natives
         [DllImport("Stocker.dll")]
         private static extern void unifiedTable_provideRecount(IntPtr data, uint index, float val);
 
+
+        [DllImport("Stocker.dll")]
+        private static extern float unifiedTable_suggestTranslation([MarshalAs(UnmanagedType.LPStr)] string from, [MarshalAs(UnmanagedType.LPStr)] string to);
+
         private IntPtr table = IntPtr.Zero;
 
         public UnifiedTable()
@@ -299,6 +303,11 @@ namespace StockerFrontend.Natives
         public void provideRecount(uint index, float newVal)
         {
             unifiedTable_provideRecount(table, index, newVal);
+        }
+
+        static public float suggestTranslation(string from, string to)
+        {
+            return unifiedTable_suggestTranslation(from, to);
         }
 
     }
