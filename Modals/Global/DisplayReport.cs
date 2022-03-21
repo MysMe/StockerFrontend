@@ -21,6 +21,8 @@ namespace StockerFrontend.Modals.Global
             var lines = report.Split('\n');
             foreach (string line in lines)
             {
+                if (line.Count() == 0)
+                    continue;
                 var columns = line.Split(',');
                 while (columns.Length > reportDisplay.Columns.Count)
                 {
@@ -30,6 +32,8 @@ namespace StockerFrontend.Modals.Global
 
                 reportDisplay.Rows.Add(columns);
             }
+            if (reportDisplay.Columns.Count > 0)
+                reportDisplay.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         public DisplayReport(string report)

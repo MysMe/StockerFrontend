@@ -59,7 +59,7 @@
             this.reportDisplay.ReadOnly = true;
             this.reportDisplay.RowHeadersVisible = false;
             this.reportDisplay.RowTemplate.Height = 25;
-            this.reportDisplay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.reportDisplay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.reportDisplay.ShowEditingIcon = false;
             this.reportDisplay.ShowRowErrors = false;
             this.reportDisplay.Size = new System.Drawing.Size(776, 397);
