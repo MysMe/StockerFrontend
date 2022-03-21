@@ -34,9 +34,9 @@ namespace StockerFrontend.Other
             sb.Append(',');
             sb.Append(entry.Size);
             sb.Append(',');
-            sb.Append(entry.GetCount());
+            sb.Append(Math.Round(entry.GetCount(), 2));
             sb.Append(',');
-            sb.Append(entry.GetVariance());
+            sb.Append(Math.Round(entry.GetVariance(), 2));
             if(entry.notes.Length > 0)
             {
                 sb.Append(",\"");

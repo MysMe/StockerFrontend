@@ -76,12 +76,12 @@ namespace StockerFrontend.Forms
                 if (ShouldShow(entries[i]))
                 {
                     CountTable.Rows.Add(
-                        i,                          //Column 0, ID
-                        entries[i].Name,            //Column 1, Name
-                        entries[i].Size,            //Column 2, Product size
-                        entries[i].GetExpected(),   //Column 3, Expected
-                        entries[i].GetCount(),      //Column 4, Counted
-                        entries[i].GetVariance());  //Column 5, Variance
+                        i,                                          //Column 0, ID
+                        entries[i].Name,                            //Column 1, Name
+                        entries[i].Size,                            //Column 2, Product size
+                        Math.Round(entries[i].GetExpected(), 2),    //Column 3, Expected
+                        Math.Round(entries[i].GetCount(), 2),       //Column 4, Counted
+                        Math.Round(entries[i].GetVariance(), 2));   //Column 5, Variance
                     ApplyColour(CountTable.Rows.Count - 1);
                 }
             }
