@@ -30,6 +30,9 @@ namespace StockerFrontend.Other
         {
             WriteString(unified.SaveToString().Get(), sw);
 
+            foreach (var entry in entries)
+                entry.SerialiseExtra(sw);
+
             sw.WriteLine(deliveries.Count.ToString());
             foreach (Delivery del in deliveries)
             {
@@ -43,33 +46,34 @@ namespace StockerFrontend.Other
             }
         }
 
-        public class FileData
+        public static bool Deform(StreamReader sr, out UnifiedTable table, out List<UnifiedEntry> entryAdditional,
+            out List<Delivery> deliveries, out List<Transfer> transfers)
         {
-            public UnifiedTable table = new UnifiedTable();
-            public List<UnifiedEntry> entries = new List<UnifiedEntry>();
-            public List<Delivery> deliveries = new List<Delivery>();
-            public List<Transfer> transfers = new List<Transfer>();
-        }
+            deliveries = new List<Delivery>();
+            transfers = new List<Transfer>();
+            table = new UnifiedTable();
+            entryAdditional = new List<UnifiedEntry>();
 
-        public static FileData? Deform(StreamReader sr)
-        {
-            FileData ret = new FileData();
+            if (!table.LoadFromString(ReadString(sr)))
+                return false;
 
-            ret.table.LoadFromString(ReadString(sr));
+            for (uint i = 0; i < table.Count(); i++)
+            {
+                entryAdditional.Add(UnifiedEntry.DeserialiseExtra(sr));
+            }
 
             int count = int.Parse(sr.ReadLine());
             for (int i = 0; i < count; i++)
             {
-                ret.deliveries.Add(Delivery.unpack(sr));
+                deliveries.Add(Delivery.unpack(sr));
             }
 
             count = int.Parse(sr.ReadLine());
             for (int i = 0; i < count; i++)
             {
-                ret.transfers.Add(Transfer.unpack(sr));
+                transfers.Add(Transfer.unpack(sr));
             }
-
-            return ret;
+            return true;
         }
     }
 }

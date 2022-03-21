@@ -38,9 +38,33 @@ namespace StockerFrontend.Natives
         public float Transferred = 0;
         public float Delivered = 0;
 
-        public UnifiedEntry(StringReader sr)
+        public void SerialiseExtra(StreamWriter sw)
         {
+            sw.WriteLine(isHidden);
+            sw.WriteLine((int)Status);
+            FileFormer.WriteString(notes, sw);
+            sw.WriteLine(Transferred);
+            sw.WriteLine(Delivered);
+        }
 
+        public static UnifiedEntry DeserialiseExtra(StreamReader sr)
+        {
+            UnifiedEntry ret = new UnifiedEntry();
+            ret.isHidden = bool.Parse(sr.ReadLine());
+            ret.Status = (status)int.Parse(sr.ReadLine());
+            ret.notes = FileFormer.ReadString(sr);
+            ret.Transferred = float.Parse(sr.ReadLine());
+            ret.Delivered = float.Parse(sr.ReadLine());
+            return ret;
+        }
+
+        public void MergeAdditional(UnifiedEntry additional)
+        {
+            isHidden = additional.isHidden;
+            Status = additional.Status;
+            notes = additional.notes;
+            Transferred = additional.Transferred;
+            Delivered = additional.Delivered;
         }
 
         public float GetCount()

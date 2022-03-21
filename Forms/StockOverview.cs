@@ -53,7 +53,6 @@ namespace StockerFrontend.Forms
             }
 
             lookup = new LookupTable(unified);
-            Regenerate();
         }
 
         private bool ShouldShow(UnifiedEntry entry)
@@ -163,10 +162,13 @@ namespace StockerFrontend.Forms
                     }
                 }
                 else
+                {
+                    Populate();
+                    Regenerate();
                     break;
+                }
             }
 
-            Populate();
 
             //Due to the order of window creation/destruction, this window is
             //put at the back of all others (including other applications).
@@ -551,25 +553,20 @@ namespace StockerFrontend.Forms
             if (res != DialogResult.OK)
                 return false;
 
-            FileFormer.FileData? data = null;
+            List<UnifiedEntry> entryAdditional;
 
             using (StreamReader sr = new StreamReader(open.FileName))
-                data = FileFormer.Deform(sr);
-
-            if (data == null)
-                return false;
-
-            unified = data.table;
-            Regenerate();
-            deliveries = data.deliveries;
-            transfers = data.transfers;
-
-            foreach (Delivery del in deliveries)
-                del.Apply(entries);
-            foreach (Transfer trx in transfers)
-                trx.Apply(entries);
+                if (!FileFormer.Deform(sr, out unified, out entryAdditional, out deliveries, out transfers))
+                    return false;
 
             unified.LoadTranslations(TranslationManager.translationFile);
+            Populate();
+            for (int i = 0; i < entryAdditional.Count(); i++)
+            {
+                entries[i].MergeAdditional(entryAdditional[i]);
+            }
+
+            Regenerate();
 
             return true;
         }
