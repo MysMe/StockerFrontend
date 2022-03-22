@@ -62,6 +62,9 @@ namespace StockerFrontend
             string? file = getFile();
             if (file != null)
             {
+                //Note that translations are allowed to fail loading silently
+                unified.LoadTranslations(TranslationManager.translationFile);
+
                 int res = unified.load(file, count);
                 if (res == 1)
                 {
@@ -80,7 +83,7 @@ namespace StockerFrontend
                     TranslationManager form = new TranslationManager(unified, count);
                     this.Hide();
                     form.ShowDialog();
-                    DialogResult = DialogResult.OK;
+                    DialogResult = form.DialogResult;
                     Close();
                 }
             }

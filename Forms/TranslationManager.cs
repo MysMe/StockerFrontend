@@ -17,8 +17,6 @@ namespace StockerFrontend.Forms
         private UnifiedTable unified = new UnifiedTable();
         private StockCountTable count = new StockCountTable();
 
-        private bool anyChanges = false;
-
         public const string translationFile = "Translations.txt";
 
         private void Populate()
@@ -27,31 +25,16 @@ namespace StockerFrontend.Forms
             if (!unified.LoadTranslations(translationFile))
             {
                 MessageBox.Show("Unable to load translation file");
-                for (uint i = 0; i < unified.GetTranslationCount(); i++)
-                {
-                    var translation = unified.GetTranslation(i);
-                    translationList.Rows.Add(
-                        i,
-                        unified.GetName(translation.UnifiedIndex) + Environment.NewLine + count.GetName(translation.CountIndex),
-                        unified.GetSize(translation.UnifiedIndex) + Environment.NewLine + count.GetSize(translation.CountIndex),
-                        UnifiedTable.suggestTranslation(unified.GetSize(translation.UnifiedIndex), count.GetSize(translation.CountIndex)));
-                }
-                anyChanges = true;
             }
-            else
+            for (uint i = 0; i < unified.GetTranslationCount(); i++)
             {
-
-                for (uint i = 0; i < unified.GetTranslationCount(); i++)
-                {
-                    var translation = unified.GetTranslation(i);
-                    translationList.Rows.Add(
-                        i,
-                        unified.GetName(translation.UnifiedIndex) + Environment.NewLine + count.GetName(translation.CountIndex),
-                        unified.GetSize(translation.UnifiedIndex) + Environment.NewLine + count.GetSize(translation.CountIndex),
-                        unified.GetTranslation(count.GetNameSize(translation.CountIndex)));
-                }
+                var translation = unified.GetTranslation(i);
+                translationList.Rows.Add(
+                    i,
+                    unified.GetName(translation.UnifiedIndex) + Environment.NewLine + count.GetName(translation.CountIndex),
+                    unified.GetSize(translation.UnifiedIndex) + Environment.NewLine + count.GetSize(translation.CountIndex),
+                    UnifiedTable.suggestTranslation(unified.GetSize(translation.UnifiedIndex), count.GetSize(translation.CountIndex)));
             }
-
         }
 
         public TranslationManager(UnifiedTable unified, StockCountTable count)
@@ -63,6 +46,7 @@ namespace StockerFrontend.Forms
             translationList.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             translationList.KeyDown += new KeyEventHandler(dataGrid_KeyDown);
             Populate();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private enum Check
@@ -101,23 +85,21 @@ namespace StockerFrontend.Forms
 
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            if (anyChanges)
+            var result = CheckContents();
+            if (result == Check.notAllNumbers)
             {
-                var result = CheckContents();
-                if (result == Check.notAllNumbers)
-                {
-                    MessageBox.Show("Error: All cells must contain numbers.");
-                    return;
-                }
-                if (result == Check.notAllValid)
-                {
-                    if (MessageBox.Show(
-                        "Warning: Some translations have a value less than or equal to zero. Continue?",
-                        "Value Warning",
-                        MessageBoxButtons.OKCancel) == DialogResult.Cancel)
-                        return;
-                }
+                MessageBox.Show("Error: All cells must contain numbers.");
+                return;
             }
+            if (result == Check.notAllValid)
+            {
+                if (MessageBox.Show(
+                    "Warning: Some translations have a value less than or equal to zero. Continue?",
+                    "Value Warning",
+                    MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                    return;
+            }
+
 
             for (int i = 0; i < translationList.Rows.Count; i++)
             {
@@ -137,8 +119,8 @@ namespace StockerFrontend.Forms
             }
 
             unified.ApplyTranslations(count.Ptr());
-            if (anyChanges)
-                unified.SaveTranslations(translationFile);
+            unified.SaveTranslations(translationFile);
+            this.DialogResult = DialogResult.OK;
             Close();
         }
     }
