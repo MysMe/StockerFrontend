@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -138,6 +139,16 @@ namespace StockerFrontend.Forms
         public StockOverview()
         {
             InitializeComponent();
+
+            //Datagridviews support double bufferring (a common visual smoothing technique)
+            //While more performance intensive, this vastly improves the visual quality of the table
+            //which has a tendency to lag.
+            //However, the attribute is normally hidden. As such, we enable it by using reflection
+            //to bypass the access restriction.
+            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.SetProperty, null,
+                CountTable, new object[] { true });
+
             this.KeyPress += StockOverview_KeyPress;
             Hide();
             while (true)
