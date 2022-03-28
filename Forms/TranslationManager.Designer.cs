@@ -120,7 +120,7 @@
             this.Controls.Add(this.DoneButton);
             this.Controls.Add(this.translationList);
             this.Name = "TranslationManager";
-            this.Text = "TranslationManager";
+            this.Text = "Manage Translations";
             ((System.ComponentModel.ISupportInitialize)(this.translationList)).EndInit();
             this.ResumeLayout(false);
 

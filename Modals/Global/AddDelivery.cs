@@ -28,6 +28,7 @@ namespace StockerFrontend.Modals.Global
             supplierLabel.Text = "Destination:";
             invoiceLabel.Hide();
             invoiceInput.Hide();
+            this.Text = "Add Transfer";
             orderContents.Columns[3].HeaderCell.Value = "Transferred";
         }
 

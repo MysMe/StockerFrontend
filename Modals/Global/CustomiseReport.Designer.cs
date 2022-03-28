@@ -193,7 +193,7 @@
             this.Controls.Add(this.itemsUnreviewed);
             this.Controls.Add(this.headerLabel);
             this.Name = "CustomiseReport";
-            this.Text = "CustomiseReport";
+            this.Text = "Customise Report";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

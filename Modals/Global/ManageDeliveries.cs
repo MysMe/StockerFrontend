@@ -29,6 +29,7 @@ namespace StockerFrontend.Modals.Global
             orderList.Columns.RemoveAt(2);
             invoiceLabel.Hide();
             supplierLabel.Text = "Destination: ";
+            this.Text = "Manage Transfers";
             orderList.Columns[1].HeaderText = "Destination";
         }
 

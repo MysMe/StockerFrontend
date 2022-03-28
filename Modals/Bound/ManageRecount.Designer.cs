@@ -108,7 +108,7 @@
             this.Controls.Add(this.doneButton);
             this.Controls.Add(this.dataGrid);
             this.Name = "ManageRecount";
-            this.Text = "ManageRecount";
+            this.Text = "Select Which Counts To Keep";
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
             this.ResumeLayout(false);
 

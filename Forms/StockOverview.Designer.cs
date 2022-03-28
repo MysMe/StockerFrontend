@@ -551,7 +551,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "StockOverview";
-            this.Text = "StockOverview";
+            this.Text = "Overview";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.CountTable)).EndInit();
             this.menuStrip1.ResumeLayout(false);

@@ -316,7 +316,7 @@
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.splitContainer1);
             this.Name = "AddDelivery";
-            this.Text = "AddDelivery";
+            this.Text = "Add Delivery";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

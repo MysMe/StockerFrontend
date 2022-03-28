@@ -81,7 +81,7 @@
             this.Controls.Add(this.noteInput);
             this.Controls.Add(this.productLabel);
             this.Name = "AddNote";
-            this.Text = "AddNote";
+            this.Text = "Add Note";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -84,7 +84,7 @@
             this.Controls.Add(this.reportDisplay);
             this.Controls.Add(this.doneButton);
             this.Name = "DisplayReport";
-            this.Text = "DisplayReport";
+            this.Text = "Display Report";
             ((System.ComponentModel.ISupportInitialize)(this.reportDisplay)).EndInit();
             this.ResumeLayout(false);
 
