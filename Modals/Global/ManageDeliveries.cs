@@ -96,6 +96,24 @@ namespace StockerFrontend.Modals.Global
             }
         }
 
+        private void Update(int index)
+        {
+            if (index > orderList.Rows.Count)
+                return;
+
+            if (isTransfers)
+            {
+                orderList.Rows[index].Cells[1].Value = transfers[index].destination;
+                orderList.Rows[index].Cells[2].Value = transfers[index].date.ToString();
+            }
+            else
+            {
+                orderList.Rows[index].Cells[1].Value = deliveries[index].supplier;
+                orderList.Rows[index].Cells[2].Value = deliveries[index].invoice;
+                orderList.Rows[index].Cells[3].Value = deliveries[index].date.ToString();
+            }
+        }
+
         private void Populate()
         {
             if (isTransfers)
@@ -190,6 +208,7 @@ namespace StockerFrontend.Modals.Global
                     return;
                 transfers[current] = form.transfer;
                 transfers[current].Apply(entries);
+                Update(current);
                 DisplayCurrent();
             }
             else
