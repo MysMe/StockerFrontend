@@ -544,7 +544,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1246, 450);
             this.Controls.Add(this.searchBox);
             this.Controls.Add(this.CountTable);
