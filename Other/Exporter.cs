@@ -105,6 +105,7 @@ namespace StockerFrontend.Other
 
         private static void ExportOrdered(List<UnifiedEntry> entries, StringBuilder sb, Mode mode)
         {
+            AppendHeader(sb);
             foreach (UnifiedEntry entry in entries)
             {
                 if (ModeIncludes(entry.Status, mode))
