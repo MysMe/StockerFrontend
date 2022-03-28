@@ -11,36 +11,65 @@ namespace StockerFrontend.Natives
     public class FullSearchResult
     {
         private IntPtr ptr = IntPtr.Zero;
+        StockCountTable parent;
 
         [DllImport("Stocker.dll")]
-        private static extern void stockTable_fullSearch_delete(IntPtr ptr);
+        private static extern uint stockTable_full_search_size(IntPtr ptr);
 
         [DllImport("Stocker.dll")]
-        private static extern uint stockTable_fullSearch_first(IntPtr ptr);
+        private static extern uint stockTable_full_search_get(IntPtr list, IntPtr ptr, uint index);
 
         [DllImport("Stocker.dll")]
-        private static extern uint stockTable_fullSearch_last(IntPtr ptr);
+        private static extern void stockTable_full_search_search_delete(IntPtr ptr);
 
-        public FullSearchResult(IntPtr contents)
+        public FullSearchResult(StockCountTable owner, IntPtr contents)
         {
             ptr = contents;
+            parent = owner;
+        }
+
+        public uint Size()
+        {
+            return stockTable_full_search_size(ptr);
+        }
+
+        public uint Get(uint index)
+        {
+            return stockTable_full_search_get(parent.Ptr(), ptr, index);
         }
 
         ~FullSearchResult()
         {
-            stockTable_fullSearch_delete(ptr);
+            stockTable_full_search_search_delete(ptr);
         }
+    }
 
-        public uint First()
+    public class FullSearchList
+    {
+        private IntPtr ptr = IntPtr.Zero;
+        private StockCountTable parent;
+
+        [DllImport("Stocker.dll")]
+        private static extern IntPtr stockTable_full_search_search_new(IntPtr ptr, [MarshalAs(UnmanagedType.LPStr)] string data);
+
+        [DllImport("Stocker.dll")]
+        private static extern uint stockTable_full_search_list_delete(IntPtr ptr);
+
+        public FullSearchList(StockCountTable owner, IntPtr contents)
         {
-            return stockTable_fullSearch_first(ptr);
+            ptr = contents;
+            parent = owner;
         }
 
-        public uint Last()
+        public FullSearchResult Search(string name)
         {
-            return stockTable_fullSearch_last(ptr);
+            return new FullSearchResult(parent, stockTable_full_search_search_new(ptr, name));
         }
 
+        ~FullSearchList()
+        {
+            stockTable_full_search_list_delete(ptr);
+        }
     }
     public class StockCountTable
     {
@@ -71,7 +100,7 @@ namespace StockerFrontend.Natives
         private static extern uint stockTable_entry_count(IntPtr table);
 
         [DllImport("Stocker.dll")]
-        private static extern IntPtr stockTable_fullSearch_new(IntPtr table, [MarshalAs(UnmanagedType.LPStr)] string product);
+        private static extern IntPtr stockTable_get_full_search_list_new(IntPtr table);
 
         public StockCountTable()
         {
@@ -133,9 +162,9 @@ namespace StockerFrontend.Natives
             return table;
         }
 
-        public FullSearchResult FullSearch(string product)
+        public FullSearchList GetSearchList()
         {
-            return new FullSearchResult(stockTable_fullSearch_new(table, product));
+            return new FullSearchList(this, stockTable_get_full_search_list_new(table));
         }
     }
 }

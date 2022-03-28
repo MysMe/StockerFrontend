@@ -31,17 +31,20 @@ namespace StockerFrontend.Modals.Bound
 
         private void Populate()
         {
+            var list = count.GetSearchList();
+            var m = count.GetEntryCount();
             for (uint i = 0; i < unified.Count(); i++)
             {
-                var matching = count.FullSearch(unified.GetName(i));
+                var matching = list.Search(unified.GetName(i));
 
                 //Does this product appear in the recount?
-                if (matching.First() == matching.Last())
+                if (matching.Size() == 0)
                     continue; //If not, continue
 
                 float total = 0;
-                for (uint pos = matching.First(); pos < matching.Last(); pos++)
+                for (uint u = 0; u < matching.Size(); u++)
                 {
+                    uint pos = matching.Get(u);
                     if (unified.HasTranslation(count.GetNameSize(pos)))
                     {
                         total +=
