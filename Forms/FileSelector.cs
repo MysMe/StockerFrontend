@@ -26,6 +26,7 @@ namespace StockerFrontend
         {
             this.unified = unified;
             InitializeComponent();
+            loadButton.Select();
         }
 
         private static string? getFile(string extension)
@@ -50,7 +51,7 @@ namespace StockerFrontend
                     SelectStockFile.Enabled = true;
                     SelectCountButton.Enabled = false;
                     ReceiveCountButton.Enabled = false;
-                    SelectStockFile.Focus();
+                    SelectStockFile.Select();
                 }
                 else
                 {
@@ -123,7 +124,7 @@ namespace StockerFrontend
                 SelectStockFile.Enabled = true;
                 SelectCountButton.Enabled = false;
                 ReceiveCountButton.Enabled = false;
-                SelectStockFile.Focus();
+                SelectStockFile.Select();
             }
             else
             {
