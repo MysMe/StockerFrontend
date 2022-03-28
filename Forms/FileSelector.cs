@@ -50,6 +50,7 @@ namespace StockerFrontend
                     SelectStockFile.Enabled = true;
                     SelectCountButton.Enabled = false;
                     ReceiveCountButton.Enabled = false;
+                    SelectStockFile.Focus();
                 }
                 else
                 {
@@ -122,6 +123,7 @@ namespace StockerFrontend
                 SelectStockFile.Enabled = true;
                 SelectCountButton.Enabled = false;
                 ReceiveCountButton.Enabled = false;
+                SelectStockFile.Focus();
             }
             else
             {
