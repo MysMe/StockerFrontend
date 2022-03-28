@@ -656,5 +656,25 @@ namespace StockerFrontend.Forms
             }
             ImportRecount(count);
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "The main grid shows a list of all counted products and their expected values." + Environment.NewLine +
+                "The variance column indicates how many are missing or surplus from the count." + Environment.NewLine +
+                "The buttons on the right can be used to perform various actions." + Environment.NewLine +
+                "Hiding an entry means it will not be visible until unhidden or the view is changed. This can be done under the visibility tab." + Environment.NewLine +
+                "Confirming an entry indicates that the count is the expected value. Multiple entries can be confirmed with the bulk actions tab." + Environment.NewLine +
+                "Recounting an entry indicates that the count is wrong, but likely due to counter error. Recounts can be imported from the file tab." + Environment.NewLine +
+                "A critical entry is notably wrong for an unknown reason and requires further investigation. You can also bulk critical entries." + Environment.NewLine +
+                "When marking an entry, it will automatically be hidden unless hide on review (in the visibility tab) is turned off." + Environment.NewLine +
+                "An entry can have notes added that show up in the final report." + Environment.NewLine +
+                "All these actions have a keyboard shortcut:" + Environment.NewLine +
+                "   NUM1 - Confirm selected or topmost entry." + Environment.NewLine +
+                "   NUM2 - Recount selected or topmost entry." + Environment.NewLine +
+                "   NUM3 - Mark selected or topmost entry as critical." + Environment.NewLine +
+                "   NUM4 - Hide the selected or topmost entry." + Environment.NewLine +
+                "   NUM5 - Open notes for the selected or topmost entry.", "Information");
+        }
     }
 }
