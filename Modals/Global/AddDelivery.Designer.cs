@@ -61,7 +61,7 @@
             // confirmButton
             // 
             this.confirmButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.confirmButton.Location = new System.Drawing.Point(921, 726);
+            this.confirmButton.Location = new System.Drawing.Point(921, 362);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(75, 23);
             this.confirmButton.TabIndex = 7;
@@ -72,7 +72,7 @@
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(840, 726);
+            this.cancelButton.Location = new System.Drawing.Point(840, 362);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 8;
@@ -103,7 +103,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.searchLabel);
             this.splitContainer1.Panel2.Controls.Add(this.searchInput);
             this.splitContainer1.Panel2.Controls.Add(this.searchResults);
-            this.splitContainer1.Size = new System.Drawing.Size(1008, 761);
+            this.splitContainer1.Size = new System.Drawing.Size(1008, 397);
             this.splitContainer1.SplitterDistance = 504;
             this.splitContainer1.TabIndex = 15;
             // 
@@ -172,7 +172,7 @@
             this.orderContents.RowHeadersVisible = false;
             this.orderContents.RowTemplate.Height = 25;
             this.orderContents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.orderContents.Size = new System.Drawing.Size(489, 650);
+            this.orderContents.Size = new System.Drawing.Size(489, 286);
             this.orderContents.TabIndex = 16;
             this.orderContents.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.orderContents_CellContentClick);
             // 
@@ -273,7 +273,7 @@
             this.searchResults.RowHeadersVisible = false;
             this.searchResults.RowTemplate.Height = 25;
             this.searchResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.searchResults.Size = new System.Drawing.Size(485, 650);
+            this.searchResults.Size = new System.Drawing.Size(485, 286);
             this.searchResults.TabIndex = 15;
             this.searchResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.searchResults_CellContentClick);
             // 
@@ -311,12 +311,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 761);
+            this.ClientSize = new System.Drawing.Size(1008, 397);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.splitContainer1);
             this.Name = "AddDelivery";
             this.Text = "AddDelivery";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
