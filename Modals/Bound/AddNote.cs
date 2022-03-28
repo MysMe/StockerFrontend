@@ -20,6 +20,24 @@ namespace StockerFrontend.Modals.Bound
             entry = unified;
             InitializeComponent();
             noteInput.Text = entry.notes;
+            noteInput.KeyPress += AddNote_KeyPress;
+            this.KeyPress += AddNote_KeyPress;
+        }
+
+        private void AddNote_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                e.Handled = true;
+                //Shift + escape does not save
+                if (Control.ModifierKeys != Keys.Shift)
+                    entry.notes = noteInput.Text;
+                Close();
+            }
+            else
+            {
+                e.Handled = false;
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
