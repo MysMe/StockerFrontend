@@ -198,9 +198,11 @@ namespace StockerFrontend.Forms
             if (CountTable.SelectedCells.Count != 0)
                 rowIndex = CountTable.SelectedCells[0].RowIndex;
 
+            e.Handled = true;
             switch (e.KeyChar)
             {
                 default:
+                    e.Handled = false;
                     return;
 
                 case (char)Keys.D4:
