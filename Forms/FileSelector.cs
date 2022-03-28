@@ -28,9 +28,10 @@ namespace StockerFrontend
             InitializeComponent();
         }
 
-        private static string? getFile()
+        private static string? getFile(string extension)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = extension;
             DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
             if (result == DialogResult.OK) // Test result.
             {
@@ -41,7 +42,7 @@ namespace StockerFrontend
 
         private void SelectCountButton_Click(object sender, EventArgs e)
         {
-            string? file = getFile();
+            string? file = getFile("CSV Stock Counts (*.csv)|*.csv");
             if (file != null)
             {
                 if (count.Load(file) == 0)
@@ -59,7 +60,7 @@ namespace StockerFrontend
 
         private void SelectStockFile_Click(object sender, EventArgs e)
         {
-            string? file = getFile();
+            string? file = getFile("XLS Stock Reports (*.xls)|*.xls");
             if (file != null)
             {
                 //Note that translations are allowed to fail loading silently

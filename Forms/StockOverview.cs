@@ -550,6 +550,10 @@ namespace StockerFrontend.Forms
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
+            save.DefaultExt = "stk";
+            save.AddExtension = true;
+            save.FileName = "Stock";
+            save.Filter = "Stock Report Files (*.stk)|*.stk";
             DialogResult res = save.ShowDialog();
             if (res != DialogResult.OK)
                 return;
@@ -560,6 +564,7 @@ namespace StockerFrontend.Forms
         private bool load()
         {
             OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Stock Report Files (*.stk)|*.stk";
             DialogResult res = open.ShowDialog();
             if (res != DialogResult.OK)
                 return false;
