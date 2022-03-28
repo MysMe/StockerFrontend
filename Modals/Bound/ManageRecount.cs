@@ -66,7 +66,8 @@ namespace StockerFrontend.Modals.Bound
                         total += count.GetCount(pos);
                     }
                 }
-                dataGrid.Rows.Add(unified.GetName(i), unified.GetCount(i), total, i);
+                if (unified.GetCount(i) != total)
+                    dataGrid.Rows.Add(unified.GetName(i), unified.GetCount(i), total, i);
             }
             newSelections.Clear();
             for (int i = 0; i < dataGrid.Rows.Count; i++)
