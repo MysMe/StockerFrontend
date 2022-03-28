@@ -27,6 +27,16 @@ namespace StockerFrontend.Modals.Bound
             InitializeComponent();
             Populate();
             dataGrid.CellClick += new DataGridViewCellEventHandler(dataGrid_CellClick);
+
+            if (dataGrid.Rows.Count == 0)
+            {
+                //Closing a form calls dispose(), which requires a fully constructed object
+                //As such, it is impossible to close a form directly from the constructor
+                //Instead, we add an event to the load handler, which is invoked immediately after the constructor completes
+                MessageBox.Show("No values varied between the new and old count.");
+                Load += (s, e) => Close();
+                return;
+            }
         }
 
         private void Populate()

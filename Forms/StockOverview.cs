@@ -165,7 +165,7 @@ namespace StockerFrontend.Forms
                     }
                     else
                     {
-                        //Closing a fowm calls dispose(), which requires a fully constructed object
+                        //Closing a form calls dispose(), which requires a fully constructed object
                         //As such, it is impossible to close a form directly from the constructor
                         //Instead, we add an event to the load handler, which is invoked immediately after the constructor completes
                         Load += (s, e) => Close();
