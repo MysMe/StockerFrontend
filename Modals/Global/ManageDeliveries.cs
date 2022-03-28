@@ -34,10 +34,10 @@ namespace StockerFrontend.Modals.Global
 
         private void Display(Delivery del)
         {
-            supplierLabel.Text = "Supplier: " + del.supplier;
-            invoiceLabel.Text = "Invoice No: " + del.invoice;
-            deliveryDateLabel.Text = "Delivered on: " + del.date.ToString();
-            orderContents.Rows.Clear();
+            ClearDisplay();
+            supplierLabel.Text += del.supplier;
+            invoiceLabel.Text += del.invoice;
+            deliveryDateLabel.Text += del.date.ToString();
             for (int i = 0; i < del.deltas.Count; i++)
             {
                 orderContents.Rows.Add(
@@ -49,9 +49,9 @@ namespace StockerFrontend.Modals.Global
 
         private void Display(Transfer trx)
         {
-            supplierLabel.Text = "Destination: " + trx.destination;
-            deliveryDateLabel.Text = "Delivered on: " + trx.date.ToString();
-            orderContents.Rows.Clear();
+            ClearDisplay();
+            supplierLabel.Text += trx.destination;
+            deliveryDateLabel.Text += trx.date.ToString();
             for (int i = 0; i < trx.deltas.Count; i++)
             {
                 orderContents.Rows.Add(
@@ -61,10 +61,29 @@ namespace StockerFrontend.Modals.Global
             }
         }
 
+        private void ClearDisplay()
+        {
+            if (isTransfers)
+            {
+                supplierLabel.Text = "Destination: ";
+                deliveryDateLabel.Text = "Delivered on: ";
+            }
+            else
+            {
+                supplierLabel.Text = "Supplier: ";
+                invoiceLabel.Text = "Invoice No: ";
+                deliveryDateLabel.Text = "Delivered on: ";
+            }
+            orderContents.Rows.Clear();
+        }
+
         private void DisplayCurrent()
         {
             if (current >= orderList.Rows.Count)
+            {
+                ClearDisplay();
                 return;
+            }
 
             if (isTransfers)
             {
@@ -140,6 +159,9 @@ namespace StockerFrontend.Modals.Global
 
         private void revokeButton_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to revoke this entry?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
+
             if (isTransfers)
             {
                 transfers[current].Remove(entries);
@@ -150,6 +172,7 @@ namespace StockerFrontend.Modals.Global
                 deliveries[current].Remove(entries);
                 deliveries.RemoveAt(current);
             }
+            orderList.Rows.RemoveAt(current);
             current = 0;
             DisplayCurrent();
         }
