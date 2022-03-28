@@ -32,20 +32,50 @@ namespace StockerFrontend.Other
             FileFormer.WriteString(date, sw);
         }
 
-        public static Delivery unpack(StreamReader sr)
+        public static Delivery? unpack(StreamReader sr)
         {
             Delivery ret = new Delivery();
-            int count = int.Parse(sr.ReadLine());
-            for (int i = 0; i < count; i++)
-                ret.products.Add(int.Parse(sr.ReadLine()));
+            string? line;
 
-            count = int.Parse(sr.ReadLine());
+            line = sr.ReadLine();
+            if (line == null)
+                return null;
+            int count = int.Parse(line);
             for (int i = 0; i < count; i++)
-                ret.deltas.Add(float.Parse(sr.ReadLine()));
+            {
+                line = sr.ReadLine();
+                if (line == null)
+                    return null;
+                ret.products.Add(int.Parse(line));
+            }
 
-            ret.supplier = FileFormer.ReadString(sr);
-            ret.invoice = FileFormer.ReadString(sr);
-            ret.date = FileFormer.ReadString(sr);
+            line = sr.ReadLine();
+            if (line == null)
+                return null;
+            count = int.Parse(line);
+
+            for (int i = 0; i < count; i++)
+            {
+                line = sr.ReadLine();
+                if (line == null)
+                    return null;
+                ret.deltas.Add(float.Parse(line));
+            }
+
+            line = FileFormer.ReadString(sr);
+            if (line == null)
+                return null;
+            ret.supplier = line;
+
+            line = FileFormer.ReadString(sr);
+            if (line == null)
+                return null;
+            ret.invoice = line;
+
+            line = FileFormer.ReadString(sr);
+            if (line == null)
+                return null;
+            ret.date = line;
 
             return ret;
         }

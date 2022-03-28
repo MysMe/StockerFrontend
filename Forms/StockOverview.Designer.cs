@@ -233,14 +233,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -250,20 +250,20 @@
             this.fromFileToolStripMenuItem,
             this.fromNetworkToolStripMenuItem});
             this.importRecountToolStripMenuItem.Name = "importRecountToolStripMenuItem";
-            this.importRecountToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importRecountToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.importRecountToolStripMenuItem.Text = "Import Recount";
             // 
             // fromFileToolStripMenuItem
             // 
             this.fromFileToolStripMenuItem.Name = "fromFileToolStripMenuItem";
-            this.fromFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fromFileToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.fromFileToolStripMenuItem.Text = "From File";
             this.fromFileToolStripMenuItem.Click += new System.EventHandler(this.fromFileToolStripMenuItem_Click);
             // 
             // fromNetworkToolStripMenuItem
             // 
             this.fromNetworkToolStripMenuItem.Name = "fromNetworkToolStripMenuItem";
-            this.fromNetworkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fromNetworkToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.fromNetworkToolStripMenuItem.Text = "From Network";
             this.fromNetworkToolStripMenuItem.Click += new System.EventHandler(this.fromNetworkToolStripMenuItem_Click);
             // 

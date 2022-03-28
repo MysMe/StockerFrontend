@@ -118,7 +118,7 @@
 
         private System.Windows.Forms.DataGridView dataGrid;
         private System.Windows.Forms.Button doneButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
+        private new System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductID;

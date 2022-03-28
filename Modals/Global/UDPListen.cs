@@ -46,7 +46,7 @@ namespace StockerFrontend.Modals.Global
             worker.WorkerSupportsCancellation = true;
         }
 
-        private void Listen(object sender, DoWorkEventArgs e)
+        private void Listen(object? sender, DoWorkEventArgs e)
         {
             BackgroundWorker? worker = sender as BackgroundWorker;
             if (worker == null)
@@ -87,7 +87,7 @@ namespace StockerFrontend.Modals.Global
             }
         }
 
-        private void UDPListen_FormClosing(object sender, FormClosingEventArgs e)
+        private void UDPListen_FormClosing(object? sender, FormClosingEventArgs e)
         {
             if (worker.WorkerSupportsCancellation == true)
             {
@@ -101,7 +101,7 @@ namespace StockerFrontend.Modals.Global
         }
 
         // This event handler updates the progress bar.
-        private void WorkerProgressChanged(object sender,
+        private void WorkerProgressChanged(object? sender,
             ProgressChangedEventArgs e)
         {
             if (e.ProgressPercentage == 100)

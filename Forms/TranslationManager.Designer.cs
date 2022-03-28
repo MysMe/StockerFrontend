@@ -133,7 +133,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CountSize;
         private System.Windows.Forms.Button DoneButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
+        private new System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ratio;
     }

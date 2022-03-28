@@ -56,7 +56,7 @@ namespace StockerFrontend.Forms
             notAllValid //All cells contain numeric values, but some are <= 0
         }
 
-        private void dataGrid_KeyDown(object sender, KeyEventArgs e)
+        private void dataGrid_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter)
             {

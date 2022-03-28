@@ -263,12 +263,11 @@
         private System.Windows.Forms.Button revokeButton;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button doneButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label deliveryDateLabel;
         private System.Windows.Forms.Label invoiceLabel;
         private System.Windows.Forms.Label supplierLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private new System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridView orderContents;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;

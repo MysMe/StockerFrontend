@@ -47,14 +47,34 @@ namespace StockerFrontend.Natives
             sw.WriteLine(Delivered);
         }
 
-        public static UnifiedEntry DeserialiseExtra(StreamReader sr)
+        public static UnifiedEntry? DeserialiseExtra(StreamReader sr)
         {
             UnifiedEntry ret = new UnifiedEntry();
-            ret.isHidden = bool.Parse(sr.ReadLine());
-            ret.Status = (status)int.Parse(sr.ReadLine());
-            ret.notes = FileFormer.ReadString(sr);
-            ret.Transferred = float.Parse(sr.ReadLine());
-            ret.Delivered = float.Parse(sr.ReadLine());
+            string? line;
+
+            line = sr.ReadLine();
+            if (line == null)
+                return null;
+            ret.isHidden = bool.Parse(line);
+
+            line = sr.ReadLine();
+            if (line == null)
+                return null;
+            ret.Status = (status)int.Parse(line);
+
+            line = FileFormer.ReadString(sr);
+            if (line == null)
+                return null;
+            ret.notes = line;
+
+            line = sr.ReadLine();
+            if (line == null)
+                return null;
+            ret.Transferred = float.Parse(line);
+            line = sr.ReadLine();
+            if (line == null)
+                return null;
+            ret.Delivered = float.Parse(line);
             return ret;
         }
 

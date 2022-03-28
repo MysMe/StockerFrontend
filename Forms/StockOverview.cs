@@ -571,9 +571,16 @@ namespace StockerFrontend.Forms
 
             List<UnifiedEntry> entryAdditional;
 
-            using (StreamReader sr = new StreamReader(open.FileName))
-                if (!FileFormer.Deform(sr, out unified, out entryAdditional, out deliveries, out transfers))
-                    return false;
+            try
+            {
+                using (StreamReader sr = new StreamReader(open.FileName))
+                    if (!FileFormer.Deform(sr, out unified, out entryAdditional, out deliveries, out transfers))
+                        return false;
+            }
+            catch
+            {
+                return false;
+            }
 
             unified.LoadTranslations(TranslationManager.translationFile);
             Populate();
