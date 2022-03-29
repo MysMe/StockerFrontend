@@ -1,4 +1,5 @@
 ﻿using StockerFrontend.Natives;
+using StockerFrontend.Other;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,8 @@ namespace StockerFrontend.Modals.Bound
             InitializeComponent();
             Populate();
             dataGrid.CellClick += new DataGridViewCellEventHandler(dataGrid_CellClick);
+
+            GridDoubleBufferring.Enable(dataGrid);
 
             if (dataGrid.Rows.Count == 0)
             {

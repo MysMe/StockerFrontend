@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockerFrontend.Other;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -67,6 +68,7 @@ namespace StockerFrontend.Modals.Global
             this.report = report;
             InitializeComponent();
             Populate();
+            GridDoubleBufferring.Enable(reportDisplay);
         }
 
         private void doneButton_Click(object sender, EventArgs e)

@@ -101,6 +101,9 @@ namespace StockerFrontend.Modals.Global
             isTransfer = transfer;
             if (isTransfer)
                 SetForTransfer();
+
+            GridDoubleBufferring.Enable(searchResults);
+            GridDoubleBufferring.Enable(orderContents);
         }
 
         public void PreFill(Delivery delivery)
