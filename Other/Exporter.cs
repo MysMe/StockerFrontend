@@ -13,14 +13,15 @@ namespace StockerFrontend.Other
 
         public enum Mode
         {
-            None        = 0,
-            Ordered     = 0b000000,
-            Categorised = 0b000001,
-            Normal      = 0b000010,
-            Confirmed   = 0b000100,
-            Recount     = 0b001000,
-            Critical    = 0b010000,
-            Transfers   = 0b100000
+            None            = 0,
+            Ordered         = 0b0000000,
+            Categorised     = 0b0000001,
+            OriginalOrder   = 0b0000010,
+            Normal          = 0b0000100,
+            Confirmed       = 0b0001000,
+            Recount         = 0b0010000,
+            Critical        = 0b0100000,
+            Transfers       = 0b1000000
         }
 
         private static void AppendHeader(StringBuilder sb)
@@ -28,15 +29,27 @@ namespace StockerFrontend.Other
             sb.AppendLine("Product Name,Size,Count,Variance,Notes");
         }
 
+        private static void AppendEntryExplicit(string name, string size, 
+            double count, double variance, 
+            StringBuilder sb)
+        {
+            sb.Append(name);
+            sb.Append(',');
+            sb.Append(size);
+            sb.Append(',');
+            sb.Append(count);
+            sb.Append(',');
+            sb.Append(variance);
+        }
+
         private static void AppendEntry(UnifiedEntry entry, StringBuilder sb)
         {
-            sb.Append(entry.Name);
-            sb.Append(',');
-            sb.Append(entry.Size);
-            sb.Append(',');
-            sb.Append(Math.Round(entry.GetCount(), 2));
-            sb.Append(',');
-            sb.Append(Math.Round(entry.GetVariance(), 2));
+            AppendEntryExplicit(
+                "\"" + entry.Name + "\"",
+                "\"" + entry.Size + "\"",
+                Math.Round(entry.GetCount(), 2),
+                Math.Round(entry.GetVariance(), 2),
+                sb);
             if(entry.notes.Length > 0)
             {
                 sb.Append(",\"");
@@ -113,6 +126,30 @@ namespace StockerFrontend.Other
             }
         }
 
+        private static void ExportOriginalOrder(UnifiedTable table, List<UnifiedEntry> entries, StringBuilder sb, Mode mode)
+        {
+            AppendHeader(sb);
+            for (uint i = 0; i < table.GetOriginalSize(); i++)
+            {
+                int index = (int)table.GetOriginalIndex(i);
+
+                if (!ModeIncludes(entries[index].Status, mode))
+                    continue;
+
+                if (table.WasOriginalTranslated(i))
+                {
+                    AppendEntryExplicit(
+                        entries[index].Name,
+                        entries[index].Size,
+                        0, 0, sb);
+                }
+                else
+                {
+                    AppendEntry(entries[index], sb);
+                }
+            }
+        }
+
         //Adds the header before the first element if any are added
         //Does not add the header otherwise
         //The header will automatically include the product table header
@@ -171,7 +208,7 @@ namespace StockerFrontend.Other
 
         }
 
-        public static string Export(List<UnifiedEntry> entries, List<Delivery> deliveries, List<Transfer> transfers, Mode mode)
+        public static string Export(UnifiedTable table, List<UnifiedEntry> entries, List<Delivery> deliveries, List<Transfer> transfers, Mode mode)
         {
 
             StringBuilder sb = new StringBuilder();
@@ -179,6 +216,10 @@ namespace StockerFrontend.Other
             if ((Mode.Categorised & mode) != 0)
             {
                 ExportCategorised(entries, sb, mode);
+            }
+            else if ((Mode.OriginalOrder & mode) != 0)
+            {
+                ExportOriginalOrder(table, entries, sb, mode);
             }
             else
             {

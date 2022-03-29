@@ -201,6 +201,14 @@ namespace StockerFrontend.Natives
         [DllImport("Stocker.dll")]
         private static extern float unifiedTable_suggestTranslation([MarshalAs(UnmanagedType.LPStr)] string from, [MarshalAs(UnmanagedType.LPStr)] string to);
 
+        [DllImport("Stocker.dll")]
+        private static extern uint unifiedTable_original_order_size(IntPtr data);
+
+        [DllImport("Stocker.dll")]
+        private static extern uint unifiedTable_original_order_get(IntPtr data, uint index);
+        [DllImport("Stocker.dll")]
+        private static extern bool unifiedTable_original_order_translated(IntPtr data, uint index);
+
         private IntPtr table = IntPtr.Zero;
 
         public UnifiedTable()
@@ -354,5 +362,20 @@ namespace StockerFrontend.Natives
             return unifiedTable_suggestTranslation(from, to);
         }
 
+
+        public uint GetOriginalSize()
+        {
+            return unifiedTable_original_order_size(table);
+        }
+
+        public uint GetOriginalIndex(uint index)
+        {
+            return unifiedTable_original_order_get(table, index);
+        }
+
+        public bool WasOriginalTranslated(uint index)
+        {
+            return unifiedTable_original_order_translated(table, index);
+        }
     }
 }

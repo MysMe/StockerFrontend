@@ -480,7 +480,7 @@ namespace StockerFrontend.Forms
 
         private void displayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayReport form = new DisplayReport(Exporter.Export(entries, deliveries, transfers, 
+            DisplayReport form = new DisplayReport(Exporter.Export(unified, entries, deliveries, transfers, 
                 Exporter.Mode.Categorised | Exporter.Mode.Normal | Exporter.Mode.Confirmed |
                 Exporter.Mode.Recount | Exporter.Mode.Critical));
             form.ShowDialog();
@@ -497,7 +497,7 @@ namespace StockerFrontend.Forms
                 {
                     using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, Encoding.UTF8))
                     {
-                        sw.Write(Exporter.Export(entries, deliveries, transfers,
+                        sw.Write(Exporter.Export(unified, entries, deliveries, transfers,
                             Exporter.Mode.Categorised | Exporter.Mode.Normal | Exporter.Mode.Confirmed |
                             Exporter.Mode.Recount | Exporter.Mode.Critical).ToString());
                         sw.Close();
@@ -531,7 +531,7 @@ namespace StockerFrontend.Forms
 
         private void basicReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayReport form = new DisplayReport(Exporter.Export(entries, deliveries, transfers,
+            DisplayReport form = new DisplayReport(Exporter.Export(unified, entries, deliveries, transfers,
                 Exporter.Mode.Categorised | Exporter.Mode.Normal | Exporter.Mode.Confirmed |
                 Exporter.Mode.Recount | Exporter.Mode.Critical));
             form.ShowDialog();
@@ -545,7 +545,7 @@ namespace StockerFrontend.Forms
                 return;
 
             DisplayReport form2 = new DisplayReport(Exporter.Export(
-                entries, deliveries, transfers, form1.mode));
+                unified, entries, deliveries, transfers, form1.mode));
             form2.ShowDialog();
         }
 

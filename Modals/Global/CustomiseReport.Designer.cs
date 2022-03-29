@@ -40,6 +40,7 @@
             this.itemsTransfers = new System.Windows.Forms.CheckBox();
             this.showButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.orderStock = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +128,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox1.Controls.Add(this.orderStock);
             this.groupBox1.Controls.Add(this.orderLabel);
             this.groupBox1.Controls.Add(this.orderOriginal);
             this.groupBox1.Controls.Add(this.orderCategorised);
@@ -177,6 +179,17 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // orderStock
+            // 
+            this.orderStock.AutoSize = true;
+            this.orderStock.Location = new System.Drawing.Point(142, 72);
+            this.orderStock.Name = "orderStock";
+            this.orderStock.Size = new System.Drawing.Size(90, 19);
+            this.orderStock.TabIndex = 8;
+            this.orderStock.Text = "Stock Count";
+            this.orderStock.UseVisualStyleBackColor = true;
+            this.orderStock.CheckedChanged += new System.EventHandler(this.orderStock_CheckedChanged);
+            // 
             // CustomiseReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -215,5 +228,6 @@
         private System.Windows.Forms.CheckBox itemsTransfers;
         private System.Windows.Forms.Button showButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.RadioButton orderStock;
     }
 }

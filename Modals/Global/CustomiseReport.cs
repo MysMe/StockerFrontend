@@ -23,17 +23,21 @@ namespace StockerFrontend.Modals.Global
         private void orderOriginal_CheckedChanged(object sender, EventArgs e)
         {
             orderCategorised.Checked = false;
+            orderStock.Checked = false;
         }
 
         private void orderCategorised_CheckedChanged(object sender, EventArgs e)
         {
             orderOriginal.Checked = false;
+            orderStock.Checked = false;
         }
 
         private void showButton_Click(object sender, EventArgs e)
         {
             if (orderOriginal.Checked)
                 mode = Exporter.Mode.Ordered;
+            else if (orderStock.Checked)
+                mode = Exporter.Mode.OriginalOrder;
             else
                 mode = Exporter.Mode.Categorised;
 
@@ -56,6 +60,12 @@ namespace StockerFrontend.Modals.Global
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void orderStock_CheckedChanged(object sender, EventArgs e)
+        {
+            orderOriginal.Checked = false;
+            orderCategorised.Checked = false;
         }
     }
 }
