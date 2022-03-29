@@ -141,7 +141,7 @@ namespace StockerFrontend.Forms
         public StockOverview()
         {
             InitializeComponent();
-            GridDoubleBufferring.Enable(CountTable);
+            GridDoubleBuffering.Enable(CountTable);
 
             this.KeyPress += StockOverview_KeyPress;
             Hide();

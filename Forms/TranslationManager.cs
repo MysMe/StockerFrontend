@@ -47,7 +47,7 @@ namespace StockerFrontend.Forms
             translationList.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             translationList.KeyDown += new KeyEventHandler(dataGrid_KeyDown);
             Populate();
-            GridDoubleBufferring.Enable(translationList);
+            GridDoubleBuffering.Enable(translationList);
             this.DialogResult = DialogResult.Cancel;
         }
 

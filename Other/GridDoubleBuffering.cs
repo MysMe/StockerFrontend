@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace StockerFrontend.Other
 {
-    public class GridDoubleBufferring
+    public class GridDoubleBuffering
     {
         public static void Enable(DataGridView view)
         {

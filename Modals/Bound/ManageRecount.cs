@@ -29,7 +29,7 @@ namespace StockerFrontend.Modals.Bound
             Populate();
             dataGrid.CellClick += new DataGridViewCellEventHandler(dataGrid_CellClick);
 
-            GridDoubleBufferring.Enable(dataGrid);
+            GridDoubleBuffering.Enable(dataGrid);
 
             if (dataGrid.Rows.Count == 0)
             {

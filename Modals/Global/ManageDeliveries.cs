@@ -157,8 +157,8 @@ namespace StockerFrontend.Modals.Global
             Populate();
             DisplayCurrent();
 
-            GridDoubleBufferring.Enable(orderList);
-            GridDoubleBufferring.Enable(orderContents);
+            GridDoubleBuffering.Enable(orderList);
+            GridDoubleBuffering.Enable(orderContents);
         }
 
         private void orderList_CellClick(object sender, DataGridViewCellEventArgs e)

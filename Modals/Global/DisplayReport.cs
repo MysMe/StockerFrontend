@@ -68,7 +68,7 @@ namespace StockerFrontend.Modals.Global
             this.report = report;
             InitializeComponent();
             Populate();
-            GridDoubleBufferring.Enable(reportDisplay);
+            GridDoubleBuffering.Enable(reportDisplay);
         }
 
         private void doneButton_Click(object sender, EventArgs e)
