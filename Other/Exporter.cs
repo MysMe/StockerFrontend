@@ -142,6 +142,7 @@ namespace StockerFrontend.Other
                         entries[index].Name,
                         entries[index].Size,
                         0, 0, sb);
+                    sb.AppendLine("");
                 }
                 else
                 {
