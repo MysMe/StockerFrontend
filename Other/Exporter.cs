@@ -140,7 +140,7 @@ namespace StockerFrontend.Other
                 {
                     AppendEntryExplicit(
                         entries[index].Name,
-                        entries[index].Size,
+                        "Translated",
                         0, 0, sb);
                     sb.AppendLine("");
                 }
